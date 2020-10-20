@@ -2,6 +2,7 @@
   <div class="container">
     <b-p-m-n-header></b-p-m-n-header>
     <div class="content">
+      <b-p-m-n-left-panel></b-p-m-n-left-panel>
       <div class="canvas" ref="canvas"></div>
       <b-p-m-n-right-panel v-if="modeler" :modeler="modeler"></b-p-m-n-right-panel>
     </div>
@@ -11,6 +12,7 @@
 <script>
 import BPMNHeader from '@/components/Header'
 import BPMNRightPanel from '@/components/RightPanel'
+import BPMNLeftPanel from '@/components/LeftPanel'
 import BPMNData from '@/assets/js/BPMNData'
 import defaultXML from '@/assets/js/defaultXML'
 import Modeler from 'bpmn-js/lib/Modeler'
@@ -111,7 +113,8 @@ export default {
   },
   components: {
     BPMNHeader,
-    BPMNRightPanel
+    BPMNRightPanel,
+    BPMNLeftPanel
   }
 }
 </script>
@@ -132,7 +135,7 @@ export default {
   justify-content: center;
 
   .canvas {
-    width: calc(100% - 300px);
+    width: calc(100% - 350px);
     height: 100vh;
     padding-top: 52px;
   }

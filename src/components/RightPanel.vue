@@ -1,5 +1,5 @@
 <template>
-  <div class="right-pane-container">
+  <div class="right-panel-container">
     <start v-if="element" :element="element"></start>
   </div>
 </template>
@@ -41,7 +41,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.right-pane-container {
+.right-panel-container {
   padding-top: 52px;
   position: relative;
   z-index: 13;
