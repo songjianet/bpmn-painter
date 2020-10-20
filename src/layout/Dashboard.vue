@@ -15,7 +15,8 @@ import BPMNRightPanel from '@/components/RightPanel'
 import BPMNLeftPanel from '@/components/LeftPanel'
 import BPMNData from '@/assets/js/BPMNData'
 import defaultXML from '@/assets/js/defaultXML'
-import Modeler from 'bpmn-js/lib/Modeler'
+
+import CustomModeler from '@/assets/js/customModeler'
 
 export default {
   name: 'Dashboard',
@@ -26,7 +27,7 @@ export default {
     }
   },
   mounted() {
-    this.modeler = new Modeler({
+    this.modeler = new CustomModeler({
       container: this.$refs.canvas
     })
 
@@ -42,7 +43,7 @@ export default {
 
       try {
         await this.modeler.importXML(xml)
-        this.setLeftPane()
+        this.setPalette()
       } catch (err) {
         console.error('装载canvas出错：', err.message, err.warnings)
       }
@@ -52,7 +53,7 @@ export default {
      * 装载并设置左侧工具栏面板
      * @author songjianet
      * */
-    setLeftPane() {
+    setPalette() {
       try {
         const canvas = this.$refs.canvas
         const djsPalette = canvas.children[0].children[1].children[4] // djsPalette是canvas节点下的一个类名
@@ -74,7 +75,7 @@ export default {
 
         // djsPaletteEntriesGroups是djsPalette类所在节点的子节点djsPaletteEntries下的所有节点
         const djsPaletteEntriesGroups = djsPalette.children[0].children
-        djsPaletteEntriesGroups[0].style['display'] = 'none'
+        // djsPaletteEntriesGroups[0].style['display'] = 'none'
 
         for (let key in djsPaletteEntriesGroups) {
           const node = djsPaletteEntriesGroups[key]
@@ -86,7 +87,6 @@ export default {
               display: 'flex',
               justifyContent: 'flex-start',
               alignItems: 'center',
-              background: 'white',
               width: '100%',
               cursor: 'pointer'
             }
@@ -98,7 +98,11 @@ export default {
             ) {
               const controlProps = new BPMNData().getControl(control.dataset.action)
 
-              control.innerHTML = `<div style='font-size: 14px;font-weight:500;margin-left:15px;'>${controlProps['title']}</div>`
+              control.innerHTML =
+                  `
+                    <img style="width: 30px;height: 30px;" src="${controlProps['image']}">
+                    <div style='font-size: 14px;font-weight:500;margin-left:15px;'>${controlProps['title']}</div>
+                  `
 
               for (let cnKey in controlStyle) {
                 control.style[cnKey] = controlStyle[cnKey]
