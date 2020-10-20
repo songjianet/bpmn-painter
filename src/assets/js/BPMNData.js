@@ -3,7 +3,7 @@
  * @author songjianet
  * */
 
-export default class BpmData {
+export default class BPMNData {
   constructor() {
     this.controls = [] // 设计器控件
     this.init()
