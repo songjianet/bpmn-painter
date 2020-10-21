@@ -31,11 +31,21 @@ PaletteProvider.prototype.getPaletteEntries = function() {
     elementFactory
   } = this
 
+  function startEvent() {
+    return function(event) {
+      const shape = elementFactory.createShape({
+        type: 'bpmn:StartEvent' // StartEvent开始、UserTask用户任务、Task任务、SequenceFlow流转线条、ExclusiveGateway排他网关、EndEvent结束
+      })
+      console.log(shape) // 只在拖动或者点击时触发
+      create.start(event, shape)
+    }
+  }
+
   function createTask() {
     return function(event) {
       const shape = elementFactory.createShape({
-        type: 'bpmn:Task'
-      });
+        type: 'bpmn:Task' // StartEvent开始、UserTask用户任务、Task任务、SequenceFlow流转线条、ExclusiveGateway排他网关、EndEvent结束
+      })
       console.log(shape) // 只在拖动或者点击时触发
       create.start(event, shape)
     }
@@ -46,6 +56,15 @@ PaletteProvider.prototype.getPaletteEntries = function() {
       group: 'model',
       className: 'icon-custom wechat-start',
       title: '创建一个微信流程的开始节点',
+      action: {
+        dragstart: startEvent(),
+        click: startEvent()
+      }
+    },
+    'create.wechat-sms': {
+      group: 'model',
+      className: 'icon-custom wechat-sms',
+      title: '创建微信自动回复节点',
       action: {
         dragstart: createTask(),
         click: createTask()

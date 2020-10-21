@@ -13,8 +13,13 @@ export default class BPMNData {
     this.controls = [
       {
         action: 'create.wechat-start',
-        image: 'https://hexo-blog-1256114407.cos.ap-shenzhen-fsi.myqcloud.com/rules.png',
+        image: 'https://vvbin.cn/next/_assets/logo.0d0ebe72.png',
         title: '微信开始'
+      },
+      {
+        action: 'create.wechat-sms',
+        image: 'https://hexo-blog-1256114407.cos.ap-shenzhen-fsi.myqcloud.com/rules.png',
+        title: '微信自动回复'
       },
       {
         action: 'create.start-event',
