@@ -54,6 +54,6 @@ export default {
   justify-content: space-between;
   -webkit-box-align: center;
   align-items: center;
-  box-shadow: rgba(39, 54, 78, 0.11) 0px -2px 10px 0px;
+  box-shadow: rgba(49, 64, 88, 0.21) 0px -2px 10px 0px;
 }
 </style>
