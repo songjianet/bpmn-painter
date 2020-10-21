@@ -15,7 +15,6 @@ import BPMNRightPanel from '@/components/RightPanel'
 import BPMNLeftPanel from '@/components/LeftPanel'
 import BPMNData from '@/assets/js/BPMNData'
 import defaultXML from '@/assets/js/defaultXML'
-
 import CustomModeler from '@/assets/js/customModeler'
 
 export default {
@@ -142,6 +141,7 @@ export default {
     width: calc(100% - 350px);
     height: 100vh;
     padding-top: 52px;
+    background-image: url("../assets/images/grid.png");
   }
 }
 </style>
