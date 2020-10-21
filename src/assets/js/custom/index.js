@@ -1,4 +1,5 @@
-import CustomPalette from './palette'
+import CustomPalette from './paletteProvider'
+import CustomContextPadProvider from './contextPadProvider'
 import CustomRenderer from './render'
 
 /**
@@ -6,7 +7,8 @@ import CustomRenderer from './render'
  * @author songjianet
  * */
 export default {
-  __init__: ['paletteProvider', 'customRenderer'],
+  __init__: ['paletteProvider', 'customRenderer', 'contextPadProvider'],
   paletteProvider: ['type', CustomPalette],
-  customRenderer: ['type', CustomRenderer]
+  customRenderer: ['type', CustomRenderer],
+  contextPadProvider: ['type', CustomContextPadProvider]
 }

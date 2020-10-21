@@ -8,3 +8,8 @@ div {
   margin: 0;
   padding: 0;
 }
+
+// 隐藏画布中节点双击后出现的输入框
+.djs-direct-editing-parent {
+  display: none !important;
+}

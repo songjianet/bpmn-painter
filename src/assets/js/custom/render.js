@@ -17,6 +17,7 @@ export default function CustomRenderer(eventBus) {
         ...attr,
         href: url
       })
+
       element['width'] = attr.width
       element['height'] = attr.height
       svgAppend(parentNode, customIcon)

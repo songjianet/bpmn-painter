@@ -53,7 +53,7 @@ PaletteProvider.prototype.getPaletteEntries = function() {
 
   return {
     'create.wechat-start': {
-      group: 'model',
+      group: 'start',
       className: 'icon-custom wechat-start',
       title: '创建一个微信流程的开始节点',
       action: {
