@@ -41,6 +41,4 @@ CustomRenderer.prototype.drawShape = function(p, element) {
   return this.drawCustomElements(p, element)
 }
 
-CustomRenderer.prototype.getShapePath = function(shape) {
-  console.log(shape)
-}
+CustomRenderer.prototype.getShapePath = function() {}

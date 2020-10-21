@@ -1,11 +1,13 @@
 <template>
   <div class="right-panel-container">
-    <start v-if="element" :element="element"></start>
+    <start v-if="element ? element.type === 'bpmn:StartEvent' : ''" :element="element"></start>
+    <task v-if="element ? element.type === 'bpmn:Task' : ''" :element="element"></task>
   </div>
 </template>
 
 <script>
 import Start from '@/components/lib/Start'
+import Task from '@/components/lib/Task'
 
 export default {
   name: 'RightPanel',
@@ -20,22 +22,22 @@ export default {
       element: null
     }
   },
-  mounted() {
-    this.handleModelerEvent()
-  },
   methods: {
-    handleModelerEvent() {
-      this.modeler.on('element.click', e => {
-        const { element } = e
-        this.element = element
-        // if (element.type === 'bpmn:Process') {
-        //   this.element = element
-        // }
-      })
+
+  },
+  computed: {
+    getElement() {
+      return this.$store.state.element
+    }
+  },
+  watch: {
+    getElement: function (val) {
+      this.element = val
     }
   },
   components: {
-    Start
+    Start,
+    Task
   }
 }
 </script>

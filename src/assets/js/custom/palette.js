@@ -25,24 +25,17 @@ Palette.$inject = [
  * 覆盖PaletteProvider原型链上的getPaletteEntries方法
  * @author songjianet
  * */
-Palette.prototype.getPaletteEntries = function(element) {
+Palette.prototype.getPaletteEntries = function() {
   const {
     create,
     elementFactory
   } = this
-
-  function clickElement() {
-    console.log(element)
-    store.commit('SETNODEINFO', element)
-    store.commit('TOGGLENODEVISIBLE', true)
-  }
 
   function startEvent() {
     return function(event) {
       const shape = elementFactory.createShape({
         type: 'bpmn:StartEvent' // StartEvent开始、UserTask用户任务、Task任务、SequenceFlow流转线条、ExclusiveGateway排他网关、EndEvent结束
       })
-      // console.log(shape) // 只在拖动或者点击时触发
       create.start(event, shape)
     }
   }
@@ -52,7 +45,6 @@ Palette.prototype.getPaletteEntries = function(element) {
       const shape = elementFactory.createShape({
         type: 'bpmn:Task' // StartEvent开始、UserTask用户任务、Task任务、SequenceFlow流转线条、ExclusiveGateway排他网关、EndEvent结束
       })
-      // console.log(shape) // 只在拖动或者点击时触发
       create.start(event, shape)
     }
   }

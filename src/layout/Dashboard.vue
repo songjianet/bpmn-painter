@@ -43,6 +43,7 @@ export default {
       try {
         await this.modeler.importXML(xml)
         this.setPalette()
+        this.initEvent()
       } catch (err) {
         console.error('装载canvas出错：', err.message, err.warnings)
       }
@@ -112,6 +113,17 @@ export default {
       } catch (e) {
         console.error('装载并设置左侧工具栏面板出错：', e)
       }
+    },
+
+    /**
+     * 装载element的点击事件
+     * @author songjianet
+     * */
+    initEvent() {
+      this.modeler.on('element.click', e => {
+        const { element } = e
+        this.$store.commit('clickElement', element)
+      })
     }
   },
   components: {
