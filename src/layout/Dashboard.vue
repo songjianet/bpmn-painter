@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <b-p-m-n-header></b-p-m-n-header>
+    <b-p-m-n-header @canvasToXML="canvasToXML"></b-p-m-n-header>
     <div class="content">
       <b-p-m-n-left-panel></b-p-m-n-left-panel>
       <div class="canvas" ref="canvas"></div>
@@ -124,6 +124,26 @@ export default {
         const { element } = e
         this.$store.commit('clickElement', element)
       })
+    },
+
+    /**
+     * 装载element的点击事件
+     * @author songjianet
+     * */
+    async canvasToXML(download = false) {
+      try {
+        let { xml } = await this.modeler.saveXML({ format: true })
+        xml = xml.replace(/&lt;/g, '<')
+        xml = xml.replace(/&gt;/g, '>')
+        if (download) {
+          this.downloadFile(`${this.getProcessElement().name}.bpmn20.xml`, xml, 'application/xml')
+        } else {
+          console.log(xml)
+        }
+        return xml
+      } catch (err) {
+        console.log(err)
+      }
     }
   },
   components: {

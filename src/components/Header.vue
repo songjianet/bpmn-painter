@@ -1,12 +1,17 @@
 <template>
   <div class="header-container">
-    111
+    <el-button @click="canvasToXML">xml</el-button>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Header'
+  name: 'Header',
+  methods: {
+    canvasToXML() {
+      this.$emit('canvasToXML')
+    }
+  }
 }
 </script>
 
