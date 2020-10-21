@@ -1,4 +1,4 @@
-export default function ContextPadProvider(contextPad, config, injector, translate, bpmnFactory, elementFactory, create, modeling, connect) {
+export default function ContextPad(contextPad, config, injector, translate, bpmnFactory, elementFactory, create, modeling, connect) {
   this.create = create
   this.elementFactory = elementFactory
   this.translate = translate
@@ -12,7 +12,7 @@ export default function ContextPadProvider(contextPad, config, injector, transla
   contextPad.registerProvider(this)
 }
 
-ContextPadProvider.$inject = [
+ContextPad.$inject = [
   'contextPad',
   'config',
   'injector',
@@ -24,7 +24,7 @@ ContextPadProvider.$inject = [
   'connect'
 ]
 
-ContextPadProvider.prototype.getContextPadEntries = function(element) {
+ContextPad.prototype.getContextPadEntries = function(element) {
   const {
     modeling,
     translate,

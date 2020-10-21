@@ -1,5 +1,5 @@
-import CustomPalette from './paletteProvider'
-import CustomContextPadProvider from './contextPadProvider'
+import CustomPalette from './palette'
+import CustomContextPadProvider from './contextPad'
 import CustomRenderer from './render'
 
 /**
