@@ -49,7 +49,7 @@
         <i class="el-icon-download"></i>
         <p>xml</p>
       </div>
-      <div class="svg">
+      <div class="svg" @click="downloadSVG">
         <i class="el-icon-download"></i>
         <p>svg</p>
       </div>
@@ -65,6 +65,10 @@
 export default {
   name: 'Header',
   methods: {
+    downloadSVG() {
+      this.$emit('downloadSVG')
+    },
+
     downloadXML() {
       this.$emit('downloadXML')
     },

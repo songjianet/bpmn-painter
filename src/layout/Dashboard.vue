@@ -2,6 +2,7 @@
   <div class="container">
     <b-p-m-n-header
         @downloadXML="downloadXML"
+        @downloadSVG="downloadSVG"
         @canvasToXML="canvasToXML"
         @isShowScaleView="isShowScaleView">
     </b-p-m-n-header>
@@ -171,6 +172,25 @@ export default {
       }
     },
 
+    /**
+     * 下载图片
+     * @author songjianet
+     * */
+    async downloadSVG() {
+      try {
+        const { svg } = await this.modeler.saveSVG({ format: true })
+        this.downloadFile(this.modeler.getDefinitions().rootElements[0].name, svg, 'image/svg+xml')
+
+        return svg
+      } catch (err) {
+        console.log(err)
+      }
+    },
+
+    /**
+     * 前端下载文件公共方法 TODO: 后续抽出去
+     * @author songjianet
+     * */
     downloadFile(filename, data, type) {
       const a = document.createElement('a')
       const url = window.URL.createObjectURL(new Blob([data], { type: type }))
