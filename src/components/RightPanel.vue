@@ -1,11 +1,13 @@
 <template>
   <div class="right-panel-container">
+    <default v-if="!element || element.type === 'bpmn:Process'"></default>
     <start v-if="element ? element.type === 'bpmn:StartEvent' : ''" :element="element"></start>
     <task v-if="element ? element.type === 'bpmn:Task' : ''" :element="element"></task>
   </div>
 </template>
 
 <script>
+import Default from '@/components/lib/Default'
 import Start from '@/components/lib/Start'
 import Task from '@/components/lib/Task'
 
@@ -32,10 +34,12 @@ export default {
   },
   watch: {
     getElement: function (val) {
+      console.log(val)
       this.element = val
     }
   },
   components: {
+    Default,
     Start,
     Task
   }
