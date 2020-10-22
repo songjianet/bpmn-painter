@@ -44,7 +44,7 @@ export default {
 
 <style lang="scss" scoped>
 .right-panel-container {
-  padding-top: 52px;
+  padding-top: 50px;
   position: relative;
   z-index: 13;
   width: 300px;

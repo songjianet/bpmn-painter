@@ -172,7 +172,7 @@ export default {
   .canvas {
     width: calc(100% - 350px);
     height: 100vh;
-    padding-top: 52px;
+    padding-top: 50px;
     background-image: url("../assets/images/grid.png");
   }
 }
