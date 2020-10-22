@@ -15,6 +15,10 @@
         <i class="el-icon-d-arrow-right"></i>
         <p>前进</p>
       </div>
+      <div class="rank">
+        <i class="el-icon-rank"></i>
+        <p>适应画布</p>
+      </div>
       <div class="scale-zoom-in">
         <i class="el-icon-zoom-in"></i>
         <p>放大</p>
@@ -23,9 +27,9 @@
         <i class="el-icon-zoom-out"></i>
         <p>缩小</p>
       </div>
-      <div class="rank">
-        <i class="el-icon-rank"></i>
-        <p>适应画布</p>
+      <div class="scale-view" @click="isShowScaleView">
+        <i class="el-icon-files"></i>
+        <p>缩略预览</p>
       </div>
     </div>
     <div class="toolbar-right">
@@ -41,7 +45,7 @@
         <i class="el-icon-refresh"></i>
         <p>重做</p>
       </div>
-      <div class="xml">
+      <div class="xml" @click="downloadXML">
         <i class="el-icon-download"></i>
         <p>xml</p>
       </div>
@@ -61,8 +65,16 @@
 export default {
   name: 'Header',
   methods: {
+    downloadXML() {
+      this.$emit('downloadXML')
+    },
+
     canvasToXML() {
       this.$emit('canvasToXML')
+    },
+
+    isShowScaleView() {
+      this.$emit('isShowScaleView')
     }
   }
 }
@@ -116,7 +128,7 @@ export default {
     width: 200px;
     display: flex;
 
-    .arrow-left, .arrow-right, .scale-zoom-in, .scale-zoom-out, .rank {
+    .arrow-left, .arrow-right, .scale-zoom-in, .scale-zoom-out, .rank, .scale-view {
       min-width: 50px;
       display: flex;
       flex-direction: column;

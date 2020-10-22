@@ -1,6 +1,10 @@
 <template>
   <div class="container">
-    <b-p-m-n-header @canvasToXML="canvasToXML"></b-p-m-n-header>
+    <b-p-m-n-header
+        @downloadXML="downloadXML"
+        @canvasToXML="canvasToXML"
+        @isShowScaleView="isShowScaleView">
+    </b-p-m-n-header>
     <div class="content">
       <b-p-m-n-left-panel></b-p-m-n-left-panel>
       <div class="canvas" ref="canvas"></div>
@@ -16,6 +20,7 @@ import BPMNLeftPanel from '@/components/LeftPanel'
 import BPMNData from '@/assets/js/BPMNData'
 import defaultXML from '@/assets/js/defaultXML'
 import CustomModeler from '@/assets/js/customModeler'
+import minimapModule from 'diagram-js-minimap'
 
 export default {
   name: 'Dashboard',
@@ -27,7 +32,10 @@ export default {
   },
   mounted() {
     this.modeler = new CustomModeler({
-      container: this.$refs.canvas
+      container: this.$refs.canvas,
+      additionalModules: [
+        minimapModule
+      ]
     })
 
     !this.xml ? this.init(defaultXML()) : this.init(this.xml)
@@ -56,7 +64,10 @@ export default {
     setPalette() {
       try {
         const canvas = this.$refs.canvas
-        const djsPalette = canvas.children[0].children[1].children[4] // djsPalette是canvas节点下的一个类名
+        const djsPalette = canvas.children[0].children[1].children[5] // djsPalette是canvas节点下的一个类名
+        const minimap = canvas.children[0].children[1].children[4]
+        minimap.style['display'] = 'none'
+
         const djsPaletteStyle = {
           width: '200px',
           padding: '8px 15px',
@@ -127,22 +138,60 @@ export default {
     },
 
     /**
-     * 装载element的点击事件
+     * 打印xml
      * @author songjianet
      * */
-    async canvasToXML(download = false) {
+    async canvasToXML() {
       try {
         let { xml } = await this.modeler.saveXML({ format: true })
         xml = xml.replace(/&lt;/g, '<')
         xml = xml.replace(/&gt;/g, '>')
-        if (download) {
-          this.downloadFile(`${this.getProcessElement().name}.bpmn20.xml`, xml, 'application/xml')
-        } else {
-          console.log(xml)
-        }
+        console.log(xml)
+
         return xml
       } catch (err) {
         console.log(err)
+      }
+    },
+
+    /**
+     * 下载xml
+     * @author songjianet
+     * */
+    async downloadXML() {
+      try {
+        let { xml } = await this.modeler.saveXML({ format: true })
+        xml = xml.replace(/&lt;/g, '<')
+        xml = xml.replace(/&gt;/g, '>')
+        this.downloadFile(`${this.modeler.getDefinitions().rootElements[0].name}.bpmn2.0.xml`, xml, 'application/xml')
+
+        return xml
+      } catch (err) {
+        console.log(err)
+      }
+    },
+
+    downloadFile(filename, data, type) {
+      const a = document.createElement('a')
+      const url = window.URL.createObjectURL(new Blob([data], { type: type }))
+      a.href = url
+      a.download = filename
+      a.click()
+      window.URL.revokeObjectURL(url)
+    },
+
+    /**
+     * 控制是否打开缩放预览
+     * @author songjianet
+     * */
+    isShowScaleView() {
+      const canvas = this.$refs.canvas
+      const minimap = canvas.children[0].children[1].children[4]
+
+      if (minimap.style.display === 'block') {
+        minimap.style['display'] = 'none'
+      } else {
+        minimap.style['display'] = 'block'
       }
     }
   },
