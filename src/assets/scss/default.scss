@@ -26,25 +26,21 @@ div, p {
   background-size: cover !important;
 }
 
+// 缩略预览默认样式
 .djs-minimap {
-  padding: 5px;
   position: fixed;
   right: 330px;
+  top: auto;
   bottom: 20px;
-  width: calc(100% - 350px) / 10;
-  height: 100vh / 10;
   cursor: pointer;
-  background-color: #fff;
   box-shadow: rgba(49, 64, 88, 0.21) 0 0 10px 0;
   border-radius: 5px;
-  overflow: hidden;
 
   .map {
-    width: calc(100% - 350px) / 10;
-    height: 100vh / 10;
+    background-color: #fff;
   }
 
-  .viewport-dom, .viewport {
+  .toggle {
     display: none;
   }
 }

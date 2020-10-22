@@ -40,6 +40,8 @@ export default {
       ]
     })
 
+    this.modeler.get('minimap').open()
+
     !this.xml ? this.init(defaultXML()) : this.init(this.xml)
   },
   methods: {
@@ -250,6 +252,7 @@ export default {
 @import "~bpmn-js/dist/assets/bpmn-font/css/bpmn.css";
 @import "~bpmn-js/dist/assets/bpmn-font/css/bpmn-codes.css";
 @import "~bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css";
+@import "~diagram-js-minimap/assets/diagram-js-minimap.css";
 
 .content {
   position: fixed;
