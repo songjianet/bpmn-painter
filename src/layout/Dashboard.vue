@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <b-p-m-n-header
+        @fitViewport="fitViewport"
         @downloadXML="downloadXML"
         @downloadSVG="downloadSVG"
         @canvasToXML="canvasToXML"
@@ -213,6 +214,27 @@ export default {
       } else {
         minimap.style['display'] = 'block'
       }
+    },
+
+    /**
+     * 适应画布
+     * @author songjianet
+     * */
+    fitViewport() {
+      this.zoom = this.modeler.get('canvas').zoom('fit-viewport')
+      const bBox = document.querySelector('.viewport').getBBox()
+      const currentViewBox = this.modeler.get('canvas').viewbox()
+      const elementMid = {
+        x: bBox.x + bBox.width / 2 - 65,
+        y: bBox.y + bBox.height / 2
+      }
+      this.modeler.get('canvas').viewbox({
+        x: elementMid.x - currentViewBox.width / 2,
+        y: elementMid.y - currentViewBox.height / 2,
+        width: currentViewBox.width,
+        height: currentViewBox.height
+      })
+      this.zoom = bBox.width / currentViewBox.width * 1.8
     }
   },
   components: {

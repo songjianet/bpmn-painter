@@ -15,7 +15,7 @@
         <i class="el-icon-d-arrow-right"></i>
         <p>前进</p>
       </div>
-      <div class="rank">
+      <div class="rank" @click="fitViewport">
         <i class="el-icon-rank"></i>
         <p>适应画布</p>
       </div>
@@ -65,6 +65,10 @@
 export default {
   name: 'Header',
   methods: {
+    fitViewport() {
+      this.$emit('fitViewport')
+    },
+
     downloadSVG() {
       this.$emit('downloadSVG')
     },
