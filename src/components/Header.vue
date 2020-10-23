@@ -7,11 +7,11 @@
       <div class="workflow-name">test项目</div>
     </div>
     <div class="toolbar-center">
-      <div class="arrow-left">
+      <div class="arrow-left" @click="previous">
         <i class="el-icon-d-arrow-left"></i>
         <p>后退</p>
       </div>
-      <div class="arrow-right">
+      <div class="arrow-right" @click="next">
         <i class="el-icon-d-arrow-right"></i>
         <p>前进</p>
       </div>
@@ -65,6 +65,14 @@
 export default {
   name: 'Header',
   methods: {
+    next() {
+      this.$emit('next')
+    },
+
+    previous() {
+      this.$emit('previous')
+    },
+
     revert() {
       this.$emit('revert')
     },

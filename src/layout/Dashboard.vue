@@ -1,6 +1,8 @@
 <template>
   <div class="container">
     <b-p-m-n-header
+        @previous="modeler.get('commandStack').undo()"
+        @next="modeler.get('commandStack').redo()"
         @revert="revert"
         @fitViewport="fitViewport"
         @downloadXML="downloadXML"
