@@ -179,7 +179,7 @@ export default {
       try {
         let { xml } = await this.modeler.saveXML({ format: true })
 
-        downloadFile(`${this.modeler.getDefinitions().rootElements[0].name}.bpmn2.0.xml`, drawToXML(xml), 'application/xml')
+        downloadFile(`${this.modeler.getDefinitions().rootElements[0].name}.bpmn20.xml`, drawToXML(xml), 'application/xml')
 
         return xml
       } catch (err) {
