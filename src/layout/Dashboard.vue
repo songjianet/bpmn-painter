@@ -1,6 +1,8 @@
 <template>
   <div class="container">
+    <!--  TODO：后续应该增加前进后退到达边界时按钮置灰  -->
     <b-p-m-n-header
+        @openLocalFile="openLocalFile"
         @previous="modeler.get('commandStack').undo()"
         @next="modeler.get('commandStack').redo()"
         @revert="revert"
@@ -247,8 +249,15 @@ export default {
      * @author songjianet
      * */
     revert() {
-      console.log(this.xml)
-      !this.xml ? this.init(defaultXML()) : this.init(this.xml)
+      this.init(defaultXML())
+    },
+
+    /**
+     * 打开本地文件
+     * @author songjianet
+     * */
+    openLocalFile(xml) {
+      this.init(xml)
     }
   },
   components: {

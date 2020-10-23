@@ -9,11 +9,11 @@
     <div class="toolbar-center">
       <div class="arrow-left" @click="previous">
         <i class="el-icon-d-arrow-left"></i>
-        <p>后退</p>
+        <p>上一步</p>
       </div>
       <div class="arrow-right" @click="next">
         <i class="el-icon-d-arrow-right"></i>
-        <p>前进</p>
+        <p>下一步</p>
       </div>
       <div class="rank" @click="fitViewport">
         <i class="el-icon-rank"></i>
@@ -33,10 +33,12 @@
       </div>
     </div>
     <div class="toolbar-right">
-      <div class="open">
-        <i class="el-icon-folder-opened"></i>
-        <p>打开</p>
-      </div>
+      <el-upload action="" :before-upload="beforeUpload">
+        <div class="open">
+          <i class="el-icon-folder-opened"></i>
+          <p>打开</p>
+        </div>
+      </el-upload>
       <div class="create">
         <i class="el-icon-circle-plus-outline"></i>
         <p>新建</p>
@@ -65,6 +67,16 @@
 export default {
   name: 'Header',
   methods: {
+    beforeUpload(file) {
+      const reader = new FileReader()
+      reader.readAsText(file, 'utf-8')
+      reader.onload = () => {
+        this.$emit('openLocalFile', reader.result)
+        // this.createNewDiagram(reader.result)
+      }
+      return false
+    },
+
     next() {
       this.$emit('next')
     },
