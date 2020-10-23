@@ -41,7 +41,7 @@
         <i class="el-icon-circle-plus-outline"></i>
         <p>新建</p>
       </div>
-      <div class="revert">
+      <div class="revert" @click="revert">
         <i class="el-icon-refresh"></i>
         <p>重做</p>
       </div>
@@ -65,6 +65,10 @@
 export default {
   name: 'Header',
   methods: {
+    revert() {
+      this.$emit('revert')
+    },
+
     fitViewport() {
       this.$emit('fitViewport')
     },
@@ -133,7 +137,7 @@ export default {
   }
 
   .toolbar-center {
-    width: 200px;
+    width: 300px;
     display: flex;
 
     .arrow-left, .arrow-right, .scale-zoom-in, .scale-zoom-out, .rank, .scale-view {

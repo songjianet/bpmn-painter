@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <b-p-m-n-header
+        @revert="revert"
         @fitViewport="fitViewport"
         @downloadXML="downloadXML"
         @downloadSVG="downloadSVG"
@@ -237,6 +238,15 @@ export default {
         height: currentViewBox.height
       })
       this.zoom = bBox.width / currentViewBox.width * 1.8
+    },
+
+    /**
+     * 重做
+     * @author songjianet
+     * */
+    revert() {
+      console.log(this.xml)
+      !this.xml ? this.init(defaultXML()) : this.init(this.xml)
     }
   },
   components: {
