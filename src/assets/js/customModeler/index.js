@@ -2,6 +2,11 @@ import Modeler from 'bpmn-js/lib/Modeler'
 import inherits from 'inherits'
 import CustomModule from '../custom'
 
+/**
+ * 导出所有自定义配置的custom
+ * @author songjianet
+ * */
+
 export default function CustomModeler(options) {
   Modeler.call(this, options)
   this._customElements = []

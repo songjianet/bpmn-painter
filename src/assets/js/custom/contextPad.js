@@ -1,3 +1,7 @@
+/**
+ * 重写bpmn.js中的ContextPad类
+ * @author songjianet
+ * */
 export default function ContextPad(contextPad, config, injector, translate, bpmnFactory, elementFactory, create, modeling, connect) {
   this.create = create
   this.elementFactory = elementFactory
@@ -12,6 +16,10 @@ export default function ContextPad(contextPad, config, injector, translate, bpmn
   contextPad.registerProvider(this)
 }
 
+/**
+ * 注入变量
+ * @author songjianet
+ * */
 ContextPad.$inject = [
   'contextPad',
   'config',
@@ -24,6 +32,10 @@ ContextPad.$inject = [
   'connect'
 ]
 
+/**
+ * 覆盖ContextPad原型链上的getContextPadEntries方法
+ * @author songjianet
+ * */
 ContextPad.prototype.getContextPadEntries = function(element) {
   const {
     modeling,

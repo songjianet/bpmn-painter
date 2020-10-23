@@ -1,3 +1,8 @@
+/**
+ * 节点组件配置
+ * @author songjianet
+ * */
+
 // StartEvent开始、UserTask用户任务、Task任务、SequenceFlow流转线条、ExclusiveGateway排他网关、EndEvent结束
 const customElements = ['bpmn:StartEvent', 'bpmn:Task']
 

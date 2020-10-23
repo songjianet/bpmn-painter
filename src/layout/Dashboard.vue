@@ -30,6 +30,8 @@ import BPMNLeftPanel from '@/components/LeftPanel'
 import BPMNData from '@/assets/js/BPMNData'
 import defaultXML from '@/assets/js/defaultXML'
 import CustomModeler from '@/assets/js/customModeler'
+import downloadFile from '@/utils/download'
+import drawToXML from '@/utils/drawToXML'
 import minimapModule from 'diagram-js-minimap'
 
 export default {
@@ -161,10 +163,9 @@ export default {
       try {
         let { xml } = await this.modeler.saveXML({ format: true })
 
-        xml = xml.replace(/&lt;/g, '<')
-        xml = xml.replace(/&gt;/g, '>')
+        console.log(drawToXML(xml))
 
-        return xml
+        return drawToXML(xml)
       } catch (err) {
         console.log(err)
       }
@@ -178,10 +179,7 @@ export default {
       try {
         let { xml } = await this.modeler.saveXML({ format: true })
 
-        xml = xml.replace(/&lt;/g, '<')
-        xml = xml.replace(/&gt;/g, '>')
-
-        this.downloadFile(`${this.modeler.getDefinitions().rootElements[0].name}.bpmn2.0.xml`, xml, 'application/xml')
+        downloadFile(`${this.modeler.getDefinitions().rootElements[0].name}.bpmn2.0.xml`, drawToXML(xml), 'application/xml')
 
         return xml
       } catch (err) {
@@ -197,27 +195,12 @@ export default {
       try {
         const { svg } = await this.modeler.saveSVG({ format: true })
 
-        this.downloadFile(this.modeler.getDefinitions().rootElements[0].name, svg, 'image/svg+xml')
+        downloadFile(this.modeler.getDefinitions().rootElements[0].name, svg, 'image/svg+xml')
 
         return svg
       } catch (err) {
         console.log(err)
       }
-    },
-
-    /**
-     * 前端下载文件公共方法 TODO: 后续抽出去
-     * @author songjianet
-     * */
-    downloadFile(filename, data, type) {
-      const a = document.createElement('a')
-      const url = window.URL.createObjectURL(new Blob([data], { type: type }))
-
-      a.href = url
-      a.download = filename
-      a.click()
-
-      window.URL.revokeObjectURL(url)
     },
 
     /**

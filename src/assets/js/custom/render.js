@@ -4,7 +4,8 @@ import {append as svgAppend, create as svgCreate} from 'tiny-svg'
 import {customConfig, customElements} from './element'
 
 /**
- * A renderer that knows how to render custom elements.
+ * 定义自定义元素渲染器，用于在画布上对组件进行自定义
+ * @author songjianet
  */
 export default function CustomRenderer(eventBus) {
   BaseRenderer.call(this, eventBus, 2000)
