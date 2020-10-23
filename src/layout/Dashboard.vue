@@ -1,10 +1,13 @@
 <template>
   <div class="container">
-    <!--  TODO：后续应该增加前进后退到达边界时按钮置灰  -->
     <b-p-m-n-header
+        :zoom="zoom"
+        @setZoom="setZoom"
+        @zoomIn="zoomIn"
+        @zoomOut="zoomOut"
         @openLocalFile="openLocalFile"
-        @previous="modeler.get('commandStack').undo()"
-        @next="modeler.get('commandStack').redo()"
+        @previous="previous"
+        @next="next"
         @revert="revert"
         @fitViewport="fitViewport"
         @downloadXML="downloadXML"
@@ -34,7 +37,8 @@ export default {
   data() {
     return {
       modeler: null,
-      xml: ''
+      xml: '',
+      zoom: 1
     }
   },
   mounted() {
@@ -59,6 +63,7 @@ export default {
 
       try {
         await this.modeler.importXML(xml)
+
         this.setPalette()
         this.initEvent()
       } catch (err) {
@@ -75,6 +80,7 @@ export default {
         const canvas = this.$refs.canvas
         const djsPalette = canvas.children[0].children[1].children[5] // djsPalette是canvas节点下的一个类名
         const minimap = canvas.children[0].children[1].children[4]
+
         minimap.style['display'] = 'none'
 
         const djsPaletteStyle = {
@@ -142,6 +148,7 @@ export default {
     initEvent() {
       this.modeler.on('element.click', e => {
         const { element } = e
+
         this.$store.commit('clickElement', element)
       })
     },
@@ -153,9 +160,9 @@ export default {
     async canvasToXML() {
       try {
         let { xml } = await this.modeler.saveXML({ format: true })
+
         xml = xml.replace(/&lt;/g, '<')
         xml = xml.replace(/&gt;/g, '>')
-        console.log(xml)
 
         return xml
       } catch (err) {
@@ -170,8 +177,10 @@ export default {
     async downloadXML() {
       try {
         let { xml } = await this.modeler.saveXML({ format: true })
+
         xml = xml.replace(/&lt;/g, '<')
         xml = xml.replace(/&gt;/g, '>')
+
         this.downloadFile(`${this.modeler.getDefinitions().rootElements[0].name}.bpmn2.0.xml`, xml, 'application/xml')
 
         return xml
@@ -187,6 +196,7 @@ export default {
     async downloadSVG() {
       try {
         const { svg } = await this.modeler.saveSVG({ format: true })
+
         this.downloadFile(this.modeler.getDefinitions().rootElements[0].name, svg, 'image/svg+xml')
 
         return svg
@@ -202,9 +212,11 @@ export default {
     downloadFile(filename, data, type) {
       const a = document.createElement('a')
       const url = window.URL.createObjectURL(new Blob([data], { type: type }))
+
       a.href = url
       a.download = filename
       a.click()
+
       window.URL.revokeObjectURL(url)
     },
 
@@ -229,18 +241,21 @@ export default {
      * */
     fitViewport() {
       this.zoom = this.modeler.get('canvas').zoom('fit-viewport')
+
       const bBox = document.querySelector('.viewport').getBBox()
       const currentViewBox = this.modeler.get('canvas').viewbox()
       const elementMid = {
         x: bBox.x + bBox.width / 2 - 65,
         y: bBox.y + bBox.height / 2
       }
+
       this.modeler.get('canvas').viewbox({
         x: elementMid.x - currentViewBox.width / 2,
         y: elementMid.y - currentViewBox.height / 2,
         width: currentViewBox.width,
         height: currentViewBox.height
       })
+
       this.zoom = bBox.width / currentViewBox.width * 1.8
     },
 
@@ -258,6 +273,67 @@ export default {
      * */
     openLocalFile(xml) {
       this.init(xml)
+    },
+
+    /**
+     * 下一步
+     * @author songjianet
+     * */
+    next() {
+      const commandStack = this.modeler.get('commandStack')
+
+      if (commandStack._stack.length - 1 === commandStack._stackIdx) {
+        console.log('next') // TODO: 后续可以根据此处判断对按钮的显示隐藏
+        return false
+      }
+
+      commandStack.redo()
+    },
+
+    /**
+     * 上一步
+     * @author songjianet
+     * */
+    previous() {
+      const commandStack = this.modeler.get('commandStack')
+
+      if (commandStack._stackIdx === -1) {
+        console.log('prev') // TODO: 后续可以根据此处判断对按钮的显示隐藏
+        return false
+      }
+
+      commandStack.undo()
+    },
+
+    /**
+     * 放大
+     * @author songjianet
+     * */
+    zoomIn() {
+      let zoom = this.modeler.get('canvas').zoom()
+      zoom += 0.1
+      this.zoom = Number(zoom.toFixed(1))
+      this.modeler.get('canvas').zoom(zoom)
+    },
+
+    /**
+     * 缩小
+     * @author songjianet
+     * */
+    zoomOut() {
+      let zoom = this.modeler.get('canvas').zoom()
+      zoom -= 0.1
+      this.zoom = Number(zoom.toFixed(1))
+      this.modeler.get('canvas').zoom(zoom)
+    },
+
+    /**
+     * 通过输入框输入的值控制放大缩小
+     * @author songjianet
+     * */
+    setZoom(val) {
+      this.zoom = val / 100
+      this.modeler.get('canvas').zoom(this.zoom)
     }
   },
   components: {

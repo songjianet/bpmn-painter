@@ -15,17 +15,20 @@
         <i class="el-icon-d-arrow-right"></i>
         <p>下一步</p>
       </div>
-      <div class="rank" @click="fitViewport">
-        <i class="el-icon-rank"></i>
-        <p>适应画布</p>
-      </div>
-      <div class="scale-zoom-in">
+      <div class="scale-zoom-in" @click="zoomIn">
         <i class="el-icon-zoom-in"></i>
         <p>放大</p>
       </div>
-      <div class="scale-zoom-out">
+      <div class="scale-zoom-number">
+        <el-input v-model.number="zoomScale" size="mini" @change="setZoom" suffix-icon="el-icon-connection"></el-input>
+      </div>
+      <div class="scale-zoom-out" @click="zoomOut">
         <i class="el-icon-zoom-out"></i>
         <p>缩小</p>
+      </div>
+      <div class="rank" @click="fitViewport">
+        <i class="el-icon-rank"></i>
+        <p>适应画布</p>
       </div>
       <div class="scale-view" @click="isShowScaleView">
         <i class="el-icon-files"></i>
@@ -66,14 +69,41 @@
 <script>
 export default {
   name: 'Header',
+  props: {
+    zoom: {
+      type: Number,
+      required: true,
+      default: () => {
+        return 1
+      }
+    }
+  },
+  data() {
+    return {
+      zoomScale: 100
+    }
+  },
   methods: {
+    setZoom() {
+      this.$emit('setZoom', this.zoomScale)
+    },
+
+    zoomIn() {
+      this.$emit('zoomIn')
+    },
+
+    zoomOut() {
+      this.$emit('zoomOut')
+    },
+
     beforeUpload(file) {
       const reader = new FileReader()
+
       reader.readAsText(file, 'utf-8')
       reader.onload = () => {
         this.$emit('openLocalFile', reader.result)
-        // this.createNewDiagram(reader.result)
       }
+
       return false
     },
 
@@ -107,6 +137,11 @@ export default {
 
     isShowScaleView() {
       this.$emit('isShowScaleView')
+    }
+  },
+  watch: {
+    zoom: function(val) {
+      this.zoomScale = (val * 100).toFixed(0)
     }
   }
 }
@@ -157,8 +192,19 @@ export default {
   }
 
   .toolbar-center {
-    width: 300px;
+    width: 390px;
     display: flex;
+
+    .scale-zoom-number {
+      min-width: 70px;
+      display: flex;
+      flex-direction: column;
+      -webkit-box-pack: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      align-items: center;
+      margin: 0 10px;
+    }
 
     .arrow-left, .arrow-right, .scale-zoom-in, .scale-zoom-out, .rank, .scale-view {
       min-width: 50px;
