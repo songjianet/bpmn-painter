@@ -86,7 +86,7 @@ export default {
         minimap.style['display'] = 'none'
 
         const djsPaletteStyle = {
-          width: '200px',
+          width: '250px',
           padding: '8px 15px',
           background: 'white',
           left: 0,

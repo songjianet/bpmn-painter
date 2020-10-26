@@ -2,7 +2,6 @@
  * 存储左侧窗口流程设计相关数据
  * @author songjianet
  * */
-
 export default class BPMNData {
   constructor() {
     this.controls = [] // 设计器控件
@@ -12,14 +11,14 @@ export default class BPMNData {
   init() {
     this.controls = [
       {
-        action: 'create.wechat-start',
+        action: 'create.wechat-subscription-official-accounts',
         image: 'https://vvbin.cn/next/_assets/logo.0d0ebe72.png',
-        title: '微信开始'
+        title: '订阅公众号'
       },
       {
-        action: 'create.wechat-sms',
+        action: 'create.automatically-reply-to-subscriber-messages',
         image: 'https://hexo-blog-1256114407.cos.ap-shenzhen-fsi.myqcloud.com/rules.png',
-        title: '微信自动回复'
+        title: '自动回复订阅用户消息'
       },
       {
         action: 'create.start-event',

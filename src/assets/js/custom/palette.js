@@ -31,41 +31,51 @@ Palette.prototype.getPaletteEntries = function() {
     elementFactory
   } = this
 
-  function startEvent() {
+  /**
+   * 订阅微信公众号
+   * @author songjianet
+   * */
+  function wechatSubscriptionOfficialAccounts() {
     return function(event) {
       const shape = elementFactory.createShape({
-        type: 'bpmn:StartEvent' // StartEvent开始、UserTask用户任务、Task任务、SequenceFlow流转线条、ExclusiveGateway排他网关、EndEvent结束
+        type: 'bpmn:ServiceTask',
+        action: 'create.wechat-subscription-official-accounts'
       })
       create.start(event, shape)
     }
   }
 
-  function createTask() {
+  /**
+   * 自动回复订阅用户消息
+   * @author songjianet
+   * */
+  function automaticallyReplyToSubscriberMessages() {
     return function(event) {
       const shape = elementFactory.createShape({
-        type: 'bpmn:Task' // StartEvent开始、UserTask用户任务、Task任务、SequenceFlow流转线条、ExclusiveGateway排他网关、EndEvent结束
+        type: 'bpmn:ServiceTask',
+        action: 'create.automatically-reply-to-subscriber-messages'
       })
       create.start(event, shape)
     }
   }
 
   return {
-    'create.wechat-start': {
+    'create.wechat-subscription-official-accounts': {
       group: 'start',
-      className: 'icon-custom wechat-start',
-      title: '创建一个微信流程的开始节点',
+      className: 'icon-custom wechat-subscription-official-accounts',
+      title: '用户订阅微信公众号',
       action: {
-        dragstart: startEvent(),
-        click: startEvent()
+        dragstart: wechatSubscriptionOfficialAccounts(),
+        click: wechatSubscriptionOfficialAccounts()
       }
     },
-    'create.wechat-sms': {
+    'create.automatically-reply-to-subscriber-messages': {
       group: 'model',
-      className: 'icon-custom wechat-sms',
-      title: '创建微信自动回复节点',
+      className: 'icon-custom automatically-reply-to-subscriber-messages',
+      title: '自动回复订阅用户消息',
       action: {
-        dragstart: createTask(),
-        click: createTask()
+        dragstart: automaticallyReplyToSubscriberMessages(),
+        click: automaticallyReplyToSubscriberMessages()
       }
     }
   }
