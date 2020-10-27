@@ -1,9 +1,6 @@
 <template>
   <div class="right-panel-container">
     <component :is="currentProperties"></component>
-<!--    <default v-if="!element || element.type === 'bpmn:Process'"></default>-->
-<!--    <start v-if="element ? element.type === 'bpmn:StartEvent' : ''" :element="element"></start>-->
-<!--    <task v-if="element ? element.type === 'bpmn:Task' : ''" :element="element"></task>-->
   </div>
 </template>
 
