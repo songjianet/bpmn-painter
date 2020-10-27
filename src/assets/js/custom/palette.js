@@ -1,3 +1,7 @@
+import BPMNData from '@/assets/js/BPMNData'
+
+const bpmnData = new BPMNData()
+
 /**
  * 重写bpmn.js中的PaletteProvider类
  * @author songjianet
@@ -26,57 +30,38 @@ Palette.$inject = [
  * @author songjianet
  * */
 Palette.prototype.getPaletteEntries = function() {
+  let actions = {}
+
   const {
     create,
     elementFactory
   } = this
 
   /**
-   * 订阅微信公众号
+   * 创建所有的palette下的action
    * @author songjianet
    * */
-  function wechatSubscriptionOfficialAccounts() {
-    return function(event) {
-      const shape = elementFactory.createShape({
-        type: 'bpmn:ServiceTask',
-        action: 'create.wechat-subscription-official-accounts'
-      })
+  const createAction = (type, group, className, title, action) => {
+
+    const createListener = (event) => {
+      const shape = elementFactory.createShape({type, action})
       create.start(event, shape)
     }
-  }
 
-  /**
-   * 自动回复订阅用户消息
-   * @author songjianet
-   * */
-  function automaticallyReplyToSubscriberMessages() {
-    return function(event) {
-      const shape = elementFactory.createShape({
-        type: 'bpmn:ServiceTask',
-        action: 'create.automatically-reply-to-subscriber-messages'
-      })
-      create.start(event, shape)
-    }
-  }
-
-  return {
-    'create.wechat-subscription-official-accounts': {
-      group: 'start',
-      className: 'icon-custom wechat-subscription-official-accounts',
-      title: '用户订阅微信公众号',
+    return {
+      group,
+      className,
+      title,
       action: {
-        dragstart: wechatSubscriptionOfficialAccounts(),
-        click: wechatSubscriptionOfficialAccounts()
-      }
-    },
-    'create.automatically-reply-to-subscriber-messages': {
-      group: 'model',
-      className: 'icon-custom automatically-reply-to-subscriber-messages',
-      title: '自动回复订阅用户消息',
-      action: {
-        dragstart: automaticallyReplyToSubscriberMessages(),
-        click: automaticallyReplyToSubscriberMessages()
+        dragstart: createListener,
+        click: createListener
       }
     }
   }
+
+  Object.assign(actions, {
+    ...bpmnData.batchCreateCustom(createAction)
+  })
+
+  return actions
 }

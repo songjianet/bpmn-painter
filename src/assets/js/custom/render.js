@@ -1,7 +1,7 @@
 import inherits from 'inherits'
 import BaseRenderer from 'diagram-js/lib/draw/BaseRenderer'
 import {append as svgAppend, create as svgCreate} from 'tiny-svg'
-import {customConfig, customElements} from './element'
+import {customConfig, customElements} from './config'
 import BPMNData from '@/assets/js/BPMNData'
 
 /**
