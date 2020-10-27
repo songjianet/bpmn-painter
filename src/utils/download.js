@@ -3,7 +3,7 @@
  * @author songjianet
  * */
 
-export default function downloadFile(filename, data, type) {
+export const downloadFile = (filename, data, type) => {
   const a = document.createElement('a')
   const url = window.URL.createObjectURL(new Blob([data], { type: type }))
 

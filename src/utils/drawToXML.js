@@ -3,7 +3,7 @@
  * @author songjianet
  * */
 
-export default function drawToXML(xml) {
+export const drawToXML = (xml) => {
   xml = xml.replace(/&lt;/g, '<')
   xml = xml.replace(/&gt;/g, '>')
 

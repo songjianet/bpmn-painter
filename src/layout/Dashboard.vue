@@ -30,8 +30,8 @@ import BPMNLeftPanel from '@/components/LeftPanel'
 import BPMNData from '@/assets/js/BPMNData'
 import defaultXML from '@/assets/js/defaultXML'
 import CustomModeler from '@/assets/js/customModeler'
-import downloadFile from '@/utils/download'
-import drawToXML from '@/utils/drawToXML'
+import { downloadFile } from '@/utils/download'
+import { drawToXML } from '@/utils/drawToXML'
 import minimapModule from 'diagram-js-minimap'
 
 export default {

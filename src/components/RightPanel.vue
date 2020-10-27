@@ -1,15 +1,14 @@
 <template>
   <div class="right-panel-container">
-    <default v-if="!element || element.type === 'bpmn:Process'"></default>
-    <start v-if="element ? element.type === 'bpmn:StartEvent' : ''" :element="element"></start>
-    <task v-if="element ? element.type === 'bpmn:Task' : ''" :element="element"></task>
+    <component :is="currentProperties"></component>
+<!--    <default v-if="!element || element.type === 'bpmn:Process'"></default>-->
+<!--    <start v-if="element ? element.type === 'bpmn:StartEvent' : ''" :element="element"></start>-->
+<!--    <task v-if="element ? element.type === 'bpmn:Task' : ''" :element="element"></task>-->
   </div>
 </template>
 
 <script>
-import Default from '@/components/lib/Default'
-import Start from '@/components/lib/Start'
-import Task from '@/components/lib/Task'
+import { horizontalLineToUpperCase } from '@/utils/horizontalLineToUpperCase'
 
 export default {
   name: 'RightPanel',
@@ -21,11 +20,16 @@ export default {
   },
   data() {
     return {
-      element: null
+      currentProperties: ''
     }
   },
+  mounted() {
+    this.initComponent('Default')
+  },
   methods: {
-
+    initComponent(component) {
+      this.currentProperties = () => import(`@/components/lib/${component}`)
+    }
   },
   computed: {
     getElement() {
@@ -34,14 +38,10 @@ export default {
   },
   watch: {
     getElement: function (val) {
-      console.log(val)
-      this.element = val
+      val.action ?
+          this.initComponent(horizontalLineToUpperCase(val.action.split('.')[1])) :
+          this.initComponent('Default')
     }
-  },
-  components: {
-    Default,
-    Start,
-    Task
   }
 }
 </script>
