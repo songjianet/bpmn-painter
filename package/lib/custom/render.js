@@ -2,7 +2,13 @@ import inherits from 'inherits'
 import BaseRenderer from 'diagram-js/lib/draw/BaseRenderer'
 import {append as svgAppend, create as svgCreate} from 'tiny-svg'
 import {customConfig, customElements} from './config'
-import BPMNData from '@/assets/js/BPMNData'
+import BPMNData from '../BPMNData'
+
+let bpmnData = new BPMNData()
+
+export function initRenderData(data) {
+  bpmnData.setControls(data)
+}
 
 /**
  * 定义自定义元素渲染器，用于在画布上对组件进行自定义
@@ -17,7 +23,7 @@ export default function CustomRenderer(eventBus) {
       const { attr } = customConfig[type]
       const customIcon = svgCreate('image', {
         ...attr,
-        href: new BPMNData().getControl(element.action).image
+        href: bpmnData.getControl(element.action).image
       })
 
       element['width'] = attr.width

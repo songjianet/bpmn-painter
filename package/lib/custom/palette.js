@@ -1,6 +1,10 @@
-import BPMNData from '@/assets/js/BPMNData'
+import BPMNData from '../BPMNData'
 
-const bpmnData = new BPMNData()
+let bpmnData = new BPMNData()
+
+export function initPaletteData(data) {
+  bpmnData.setControls(data)
+}
 
 /**
  * 重写bpmn.js中的PaletteProvider类

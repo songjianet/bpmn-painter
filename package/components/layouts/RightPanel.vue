@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { horizontalLineToUpperCase } from '@/utils/horizontalLineToUpperCase'
+import { horizontalLineToUpperCase } from '../../../utils/horizontalLineToUpperCase'
 
 export default {
   name: 'RightPanel',
@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     initComponent(component) {
-      this.currentProperties = () => import(`@/components/lib/${component}`)
+      this.currentProperties = () => import(`../actions/${component}`)
     }
   },
   computed: {

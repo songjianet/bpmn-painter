@@ -24,50 +24,68 @@
 </template>
 
 <script>
-import BPMNHeader from '@/components/Header'
-import BPMNRightPanel from '@/components/RightPanel'
-import BPMNLeftPanel from '@/components/LeftPanel'
-import BPMNData from '@/assets/js/BPMNData'
-import defaultXML from '@/assets/js/defaultXML'
-import CustomModeler from '@/assets/js/customModeler'
-import { downloadFile } from '@/utils/download'
-import { drawToXML } from '@/utils/drawToXML'
+import BPMNHeader from './layouts/Header'
+import BPMNRightPanel from './layouts/RightPanel'
+import BPMNLeftPanel from './layouts/LeftPanel'
+import BPMNData from '../lib/BPMNData'
+import defaultXML from '../lib/defaultXML'
+import CustomModeler from '../lib/customModeler'
+import { downloadFile } from '../../utils/download'
+import { drawToXML } from '../../utils/drawToXML'
+import { initPaletteData } from '../lib/custom/palette'
+import { initRenderData } from '../lib/custom/render'
 import minimapModule from 'diagram-js-minimap'
 
 export default {
-  name: 'Dashboard',
+  name: 'bpmn-painter',
+  props: {
+    data: {
+      type: Array,
+      default: () => []
+    }
+  },
   data() {
     return {
       modeler: null,
       xml: '',
-      zoom: 1
+      zoom: 1,
+      bpmnData: new BPMNData()
     }
   },
-  mounted() {
-    this.modeler = new CustomModeler({
-      container: this.$refs.canvas,
-      additionalModules: [
-        minimapModule
-      ]
-    })
-
-    this.modeler.get('minimap').open()
-
-    !this.xml ? this.init(defaultXML()) : this.init(this.xml)
+  async mounted() {
+    await this.bpmnData.setControls(this.data)
+    await initPaletteData(this.data)
+    await initRenderData(this.data)
+    await this.initModeler()
+    !this.xml ? await this.initDraw(defaultXML()) : await this.initDraw(this.xml)
   },
   methods: {
+    /**
+     * 装载modeler
+     * @author songjianet
+     * */
+    initModeler() {
+      this.modeler = new CustomModeler({
+        container: this.$refs.canvas,
+        additionalModules: [
+          minimapModule
+        ]
+      })
+
+      this.modeler.get('minimap').open()
+    },
+
     /**
      * 装载canvas
      * @author songjianet
      * */
-    async init(xml) {
+    async initDraw(xml) {
       xml = xml.replace(/<!\[CDATA\[(.+)]]>/g, '&lt;![CDATA[$1]]&gt;')
 
       try {
         await this.modeler.importXML(xml)
-
-        this.setPalette()
-        this.initEvent()
+        await this.setPalette()
+        await this.initEvent()
       } catch (err) {
         console.error('装载canvas出错：', err.message, err.warnings)
       }
@@ -124,13 +142,15 @@ export default {
                 control.dataset &&
                 control.className.indexOf('entry') !== -1
             ) {
-              const controlProps = new BPMNData().getControl(control.dataset.action)
+              const controlProps = this.bpmnData.getControl(control.dataset.action)
 
-              control.innerHTML =
-                  `
+              if (controlProps) {
+                control.innerHTML =
+                    `
                     <img style="width: 30px;height: 30px;" src="${controlProps['image']}">
                     <div style='font-size: 14px;font-weight:500;margin-left:15px;'>${controlProps['title']}</div>
                   `
+              }
 
               for (let cnKey in controlStyle) {
                 control.style[cnKey] = controlStyle[cnKey]
@@ -247,7 +267,7 @@ export default {
      * @author songjianet
      * */
     revert() {
-      this.init(defaultXML())
+      this.initDraw(defaultXML())
     },
 
     /**
@@ -255,7 +275,7 @@ export default {
      * @author songjianet
      * */
     openLocalFile(xml) {
-      this.init(xml)
+      this.initDraw(xml)
     },
 
     /**
@@ -334,6 +354,55 @@ export default {
 @import "~bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css";
 @import "~diagram-js-minimap/assets/diagram-js-minimap.css";
 
+// default
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: rgb(245, 245, 245);
+}
+
+div, p {
+  margin: 0;
+  padding: 0;
+}
+
+// 隐藏画布中节点双击后出现的输入框
+.djs-direct-editing-parent {
+  display: none !important;
+}
+
+// 设置contextPad中连接线图片
+.djs-context-pad .icon-custom-connection-line {
+  background: url('../assets/images/contentPad/line.png') center no-repeat !important;
+  background-size: cover !important;
+}
+
+// 设置contextPad中删除图片
+.djs-context-pad .icon-custom-delete {
+  background: url('../assets/images/contentPad/delete.png') center no-repeat !important;
+  background-size: cover !important;
+}
+
+// 缩略预览默认样式
+.djs-minimap {
+  position: fixed;
+  right: 330px;
+  top: auto;
+  bottom: 20px;
+  cursor: pointer;
+  box-shadow: rgba(49, 64, 88, 0.21) 0 0 10px 0;
+  border-radius: 5px;
+
+  .map {
+    background-color: #fff;
+  }
+
+  .toggle {
+    display: none;
+  }
+}
+
+// component
 .content {
   position: fixed;
   top: 0;

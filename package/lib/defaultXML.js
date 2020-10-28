@@ -1,4 +1,4 @@
-import { randomStr } from '@/utils/randomStr'
+import { randomStr } from '../../utils/randomStr'
 
 /**
  * 导出默认的xml信息，空白画布
