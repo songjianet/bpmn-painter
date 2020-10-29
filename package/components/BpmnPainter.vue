@@ -18,7 +18,7 @@
     <div class="content">
       <b-p-m-n-left-panel></b-p-m-n-left-panel>
       <div class="canvas" ref="canvas"></div>
-      <b-p-m-n-right-panel v-if="modeler" :modeler="modeler"></b-p-m-n-right-panel>
+      <b-p-m-n-right-panel v-if="modeler" :element="element"></b-p-m-n-right-panel>
     </div>
   </div>
 </template>
@@ -48,8 +48,9 @@ export default {
     return {
       modeler: null,
       xml: '',
-      zoom: 1,
-      bpmnData: new BPMNData()
+      zoom: 1, // 缩放比例
+      bpmnData: new BPMNData(),
+      element: '' // render上点击节点后的dom
     }
   },
   async mounted() {
@@ -171,7 +172,7 @@ export default {
       this.modeler.on('element.click', e => {
         const { element } = e
 
-        this.$store.commit('clickElement', element)
+        this.element = element
       })
     },
 

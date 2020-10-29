@@ -1,7 +1,7 @@
 {
   "name": "bpmn-painter",
   "description": "使用vue2.x和element实现bpmn流程设计器",
-  "version": "0.1.1",
+  "version": "0.1.10",
   "author": "songjianet <1778651752@qq.com>",
   "license": "MIT",
   "main": "dist/bpmn-painter.umd.min.js",
@@ -28,8 +28,7 @@
     "diagram-js-minimap": "^2.0.3",
     "element-ui": "^2.13.2",
     "vue": "^2.6.11",
-    "vue-router": "^3.2.0",
-    "vuex": "^3.4.0"
+    "vue-router": "^3.2.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

@@ -6,39 +6,33 @@
 
 <script>
 import { horizontalLineToUpperCase } from '../../../utils/horizontalLineToUpperCase'
+import AutomaticallyReplyToSubscriberMessages from '../actions/AutomaticallyReplyToSubscriberMessages'
+import ClickTheGreetingLink from '../actions/ClickTheGreetingLink'
+import ClickToSendTemplateMessage from '../actions/ClickToSendTemplateMessage'
+import EndProcess from '../actions/EndProcess'
+import WechatSubscriptionOfficialAccounts from '../actions/WechatSubscriptionOfficialAccounts'
+import Default from '../actions/Default'
 
 export default {
   name: 'RightPanel',
-  props: {
-    modeler: {
-      type: Object,
-      required: true
-    }
-  },
+  props: ['element'],
   data() {
     return {
-      currentProperties: ''
-    }
-  },
-  mounted() {
-    this.initComponent('Default')
-  },
-  methods: {
-    initComponent(component) {
-      this.currentProperties = () => import(`../actions/${component}`)
-    }
-  },
-  computed: {
-    getElement() {
-      return this.$store.state.element
+      currentProperties: 'Default'
     }
   },
   watch: {
-    getElement: function (val) {
-      val.action ?
-          this.initComponent(horizontalLineToUpperCase(val.action.split('.')[1])) :
-          this.initComponent('Default')
+    element: function (val) {
+      val.action ? this.currentProperties = horizontalLineToUpperCase(val.action.split('.')[1]) : this.currentProperties = 'Default'
     }
+  },
+  components: {
+    AutomaticallyReplyToSubscriberMessages,
+    ClickTheGreetingLink,
+    ClickToSendTemplateMessage,
+    EndProcess,
+    WechatSubscriptionOfficialAccounts,
+    Default
   }
 }
 </script>
