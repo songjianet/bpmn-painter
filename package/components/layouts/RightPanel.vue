@@ -1,6 +1,6 @@
 <template>
   <div class="right-panel-container">
-    <component :is="currentProperties"></component>
+    <component :is="currentProperties" :element="element"></component>
   </div>
 </template>
 
@@ -20,6 +20,9 @@ export default {
     return {
       currentProperties: 'Default'
     }
+  },
+  mounted: function () {
+    window.sessionStorage.setItem('params', JSON.stringify({}))
   },
   watch: {
     element: function (val) {

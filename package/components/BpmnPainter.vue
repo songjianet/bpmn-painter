@@ -106,7 +106,7 @@ export default {
 
         const djsPaletteStyle = {
           width: '250px',
-          padding: '8px 15px',
+          padding: '8px 10px',
           background: 'white',
           left: 0,
           top: 0,

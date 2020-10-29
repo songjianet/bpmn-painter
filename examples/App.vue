@@ -22,7 +22,7 @@ export default {
         {
           action: 'create.wechat-subscription-official-accounts',
           image: wechatSubscriptionOfficialAccounts,
-          title: '订阅微信公众号',
+          title: '用户订阅公众号',
           type: 'bpmn:StartEvent',
           group: 'event',
           className: 'icon-custom wechat-subscription-official-accounts'
@@ -38,7 +38,7 @@ export default {
         {
           action: 'create.click-to-send-template-message',
           image: clickToSendTemplateMessage,
-          title: '点击链接回复模板消息',
+          title: '用户点击链接后回复模板消息',
           type: 'bpmn:ServiceTask',
           group: 'activity',
           className: 'icon-custom click-to-send-template-message'
@@ -46,7 +46,7 @@ export default {
         {
           action: 'create.click-the-greeting-link',
           image: clickTheGreetingLink,
-          title: '点击问候链接',
+          title: '用户点击问候链接',
           type: 'bpmn:UserTask',
           group: 'activity',
           className: 'icon-custom click-the-greeting-link'
