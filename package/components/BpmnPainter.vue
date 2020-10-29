@@ -184,7 +184,7 @@ export default {
       try {
         let { xml } = await this.modeler.saveXML({ format: true })
 
-        console.log(drawToXML(xml))
+        this.$emit('save', drawToXML(xml))
 
         return drawToXML(xml)
       } catch (err) {

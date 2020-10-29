@@ -1,5 +1,8 @@
 <template>
-  <bpmn-painter :data="data"></bpmn-painter>
+  <bpmn-painter
+      :data="data"
+      @save="save">
+  </bpmn-painter>
 </template>
 
 <script>
@@ -57,6 +60,11 @@ export default {
           className: 'icon-custom end-process'
         }
       ]
+    }
+  },
+  methods: {
+    save(xml) {
+      console.log(xml)
     }
   },
   components: {
