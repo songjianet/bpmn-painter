@@ -354,55 +354,6 @@ export default {
 @import "~bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css";
 @import "~diagram-js-minimap/assets/diagram-js-minimap.css";
 
-// default
-html, body {
-  margin: 0;
-  padding: 0;
-  background-color: rgb(245, 245, 245);
-}
-
-div, p {
-  margin: 0;
-  padding: 0;
-}
-
-// 隐藏画布中节点双击后出现的输入框
-.djs-direct-editing-parent {
-  display: none !important;
-}
-
-// 设置contextPad中连接线图片
-.djs-context-pad .icon-custom-connection-line {
-  background: url('../assets/images/contentPad/line.png') center no-repeat !important;
-  background-size: cover !important;
-}
-
-// 设置contextPad中删除图片
-.djs-context-pad .icon-custom-delete {
-  background: url('../assets/images/contentPad/delete.png') center no-repeat !important;
-  background-size: cover !important;
-}
-
-// 缩略预览默认样式
-.djs-minimap {
-  position: fixed;
-  right: 330px;
-  top: auto;
-  bottom: 20px;
-  cursor: pointer;
-  box-shadow: rgba(49, 64, 88, 0.21) 0 0 10px 0;
-  border-radius: 5px;
-
-  .map {
-    background-color: #fff;
-  }
-
-  .toggle {
-    display: none;
-  }
-}
-
-// component
 .content {
   position: fixed;
   top: 0;
