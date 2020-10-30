@@ -174,6 +174,11 @@ export default {
 
         this.element = element
       })
+      this.modeler.on('element.hover', e => {
+        const { element } = e
+
+        this.element = element
+      })
     },
 
     /**
@@ -184,7 +189,10 @@ export default {
       try {
         let { xml } = await this.modeler.saveXML({ format: true })
 
-        this.$emit('save', drawToXML(xml))
+        this.$emit('save', {
+          xml: drawToXML(xml),
+          params: JSON.parse(window.sessionStorage.getItem('params'))
+        })
 
         return drawToXML(xml)
       } catch (err) {

@@ -14,6 +14,8 @@ import automaticallyReplyToSubscriberMessages
 import clickToSendTemplateMessage from './assets/images/palette/clickToSendTemplateMessage.png'
 import clickTheGreetingLink from './assets/images/palette/clickTheGreetingLink.png'
 import endProcess from './assets/images/palette/endProcess.png'
+import '../dist/bpmn-painter.css'
+import '../package/assets/scss/default.scss'
 
 export default {
   data() {
@@ -63,8 +65,8 @@ export default {
     }
   },
   methods: {
-    save(xml) {
-      console.log(xml)
+    save(data) {
+      console.log(data)
     }
   },
   components: {
