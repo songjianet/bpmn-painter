@@ -45,7 +45,7 @@ Palette.prototype.getPaletteEntries = function() {
    * 创建所有的palette下的action
    * @author songjianet
    * */
-  const createAction = (type, group, className, title, action) => {
+  const createAction = (type, group, title, action) => {
 
     const createListener = (event) => {
       const shape = elementFactory.createShape({type, action})
@@ -54,7 +54,6 @@ Palette.prototype.getPaletteEntries = function() {
 
     return {
       group,
-      className,
       title,
       action: {
         dragstart: createListener,

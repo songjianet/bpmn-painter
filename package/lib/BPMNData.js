@@ -134,7 +134,7 @@ export default class BPMNData {
     const customs = {}
 
     this.controls.forEach(item => {
-      customs[item['action']] = fn(item.type, item.group, item.className, item.title, item.action)
+      customs[item['action']] = fn(item.type, item.group, item.title, item.action)
     })
 
     return customs
