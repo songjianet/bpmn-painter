@@ -34,6 +34,7 @@ import { downloadFile } from '../../utils/download'
 import { drawToXML } from '../../utils/drawToXML'
 import { initPaletteData } from '../lib/custom/palette'
 import { initRenderData } from '../lib/custom/render'
+import { disableRightClick } from '../../utils/disableRightClick'
 import minimapModule from 'diagram-js-minimap'
 
 export default {
@@ -54,6 +55,7 @@ export default {
     }
   },
   async mounted() {
+    await disableRightClick()
     await this.bpmnData.setControls(this.data)
     await initPaletteData(this.data)
     await initRenderData(this.data)
