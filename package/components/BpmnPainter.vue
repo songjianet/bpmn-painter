@@ -16,7 +16,7 @@
         @isShowScaleView="isShowScaleView">
     </b-p-m-n-header>
     <div class="content">
-      <b-p-m-n-left-panel></b-p-m-n-left-panel>
+      <b-p-m-n-left-panel :data="data"></b-p-m-n-left-panel>
       <div class="canvas" ref="canvas"></div>
       <b-p-m-n-right-panel v-if="modeler" :element="element"></b-p-m-n-right-panel>
     </div>
@@ -27,13 +27,11 @@
 import BPMNHeader from './layouts/Header'
 import BPMNRightPanel from './layouts/RightPanel'
 import BPMNLeftPanel from './layouts/LeftPanel'
-import BPMNData from '../lib/BPMNData'
+import { setControls, getControl } from '../lib/BPMNData'
 import defaultXML from '../lib/defaultXML'
 import CustomModeler from '../lib/customModeler'
 import { downloadFile } from '../../utils/download'
 import { drawToXML } from '../../utils/drawToXML'
-import { initPaletteData } from '../lib/custom/palette'
-import { initRenderData } from '../lib/custom/render'
 import { disableRightClick } from '../../utils/disableRightClick'
 import minimapModule from 'diagram-js-minimap'
 
@@ -50,16 +48,14 @@ export default {
       modeler: null,
       xml: '',
       zoom: 1, // 缩放比例
-      bpmnData: new BPMNData(),
       element: '' // render上点击节点后的dom
     }
   },
   async mounted() {
+    await setControls(this.data)
     await disableRightClick()
-    await this.bpmnData.setControls(this.data)
-    await initPaletteData(this.data)
-    await initRenderData(this.data)
     await this.initModeler()
+    await this.initMinimap()
     !this.xml ? await this.initDraw(defaultXML()) : await this.initDraw(this.xml)
   },
   methods: {
@@ -74,8 +70,6 @@ export default {
           minimapModule
         ]
       })
-
-      this.modeler.get('minimap').open()
     },
 
     /**
@@ -102,9 +96,6 @@ export default {
       try {
         const canvas = this.$refs.canvas
         const djsPalette = canvas.children[0].children[1].children[5] // djsPalette是canvas节点下的一个类名
-        const minimap = canvas.children[0].children[1].children[4]
-
-        minimap.style['display'] = 'none'
 
         const djsPaletteStyle = {
           width: '250px',
@@ -145,7 +136,7 @@ export default {
                 control.dataset &&
                 control.className.indexOf('entry') !== -1
             ) {
-              const controlProps = this.bpmnData.getControl(control.dataset.action)
+              const controlProps = getControl(control.dataset.action)
 
               if (controlProps) {
                 control.innerHTML =
@@ -181,6 +172,19 @@ export default {
 
         this.element = element
       })
+    },
+
+    /**
+     * 装载minimap
+     * @author songjianet
+     * */
+    initMinimap() {
+      this.modeler.get('minimap').open()
+
+      const canvas = this.$refs.canvas
+      const minimap = canvas.children[0].children[1].children[4]
+
+      minimap.style['display'] = 'none'
     },
 
     /**

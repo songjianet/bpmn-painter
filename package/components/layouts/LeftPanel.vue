@@ -1,12 +1,7 @@
 <template>
   <div class="left-panel-container">
-    <div>
-      <el-tooltip class="item" effect="dark" content="微信节点" placement="right">
-        <i class="el-icon-chat-line-square"></i>
-      </el-tooltip>
-    </div>
-    <div>
-      <el-tooltip class="item" effect="dark" content="企业微信节点" placement="right">
+    <div v-for="(item, index) in data" :key="index">
+      <el-tooltip class="item" effect="dark" :content="item.shapeGroup" placement="right">
         <i class="el-icon-chat-line-square"></i>
       </el-tooltip>
     </div>
@@ -15,7 +10,13 @@
 
 <script>
 export default {
-  name: 'LeftPanel'
+  name: 'LeftPanel',
+  props: {
+    data: {
+      type: Array,
+      default: () => []
+    }
+  }
 }
 </script>
 

@@ -26,35 +26,40 @@ export default {
           image: wechatSubscriptionOfficialAccounts,
           title: '用户订阅公众号',
           type: 'bpmn:StartEvent',
-          group: 'event'
+          group: 'event',
+          shapeGroup: '沟通渠道'
         },
         {
           action: 'create.automatically-reply-to-subscriber-messages',
           image: automaticallyReplyToSubscriberMessages,
           title: '自动回复订阅用户消息',
           type: 'bpmn:ServiceTask',
-          group: 'activity'
+          group: 'activity',
+          shapeGroup: '激励方式'
         },
         {
           action: 'create.click-to-send-template-message',
           image: clickToSendTemplateMessage,
           title: '用户点击链接后回复模板消息',
           type: 'bpmn:ServiceTask',
-          group: 'activity'
+          group: 'activity',
+          shapeGroup: '触点'
         },
         {
           action: 'create.click-the-greeting-link',
           image: clickTheGreetingLink,
           title: '用户点击问候链接',
           type: 'bpmn:UserTask',
-          group: 'activity'
+          group: 'activity',
+          shapeGroup: '规则'
         },
         {
           action: 'create.end-process',
           image: endProcess,
           title: '结束流程',
           type: 'bpmn:EndEvent',
-          group: 'event'
+          group: 'event',
+          shapeGroup: '事件'
         }
       ]
     }

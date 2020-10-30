@@ -1,10 +1,4 @@
-import BPMNData from '../BPMNData'
-
-let bpmnData = new BPMNData()
-
-export function initPaletteData(data) {
-  bpmnData.setControls(data)
-}
+import { batchCreateCustom } from '../BPMNData'
 
 /**
  * 重写bpmn.js中的PaletteProvider类
@@ -63,7 +57,7 @@ Palette.prototype.getPaletteEntries = function() {
   }
 
   Object.assign(actions, {
-    ...bpmnData.batchCreateCustom(createAction)
+    ...batchCreateCustom(createAction)
   })
 
   return actions
