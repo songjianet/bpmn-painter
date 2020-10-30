@@ -174,7 +174,7 @@ export default {
 
         this.element = element
       })
-      this.modeler.on('element.hover', e => {
+      this.modeler.on('shape.added', e => {
         const { element } = e
 
         this.element = element
