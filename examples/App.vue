@@ -35,7 +35,7 @@ export default {
           title: '自动回复订阅用户消息',
           type: 'bpmn:ServiceTask',
           group: 'activity',
-          shapeGroup: '激励方式'
+          shapeGroup: '沟通渠道'
         },
         {
           action: 'create.click-to-send-template-message',

@@ -1,6 +1,6 @@
 <template>
   <div class="left-panel-container">
-    <div v-for="(item, index) in data" :key="index">
+    <div v-for="(item, index) in data" :key="index" @click="currentShape(item)">
       <el-tooltip class="item" effect="dark" :content="item.shapeGroup" placement="right">
         <i class="el-icon-chat-line-square"></i>
       </el-tooltip>
@@ -15,6 +15,11 @@ export default {
     data: {
       type: Array,
       default: () => []
+    }
+  },
+  methods: {
+    currentShape(item) {
+      this.$emit('currentShape', item.shapeGroup)
     }
   }
 }

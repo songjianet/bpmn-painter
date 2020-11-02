@@ -1,4 +1,12 @@
-const customElements = ['bpmn:StartEvent', 'bpmn:ServiceTask', 'bpmn:UserTask', 'bpmn:EndEvent']
+const customElements = [
+  'bpmn:StartEvent',
+  'bpmn:ServiceTask',
+  'bpmn:UserTask',
+  'bpmn:EndEvent',
+  'bpmn:IntermediateCatchEvent',
+  'bpmn:IntermediateThrowEvent',
+  'bpmn:BoundaryEvent'
+]
 
 const customConfig = {
   'bpmn:StartEvent': {
@@ -12,9 +20,26 @@ const customConfig = {
   },
   'bpmn:EndEvent': {
     'attr': { x: 0, y: 0, width: 48, height: 48 }
+  },
+  'bpmn:IntermediateCatchEvent': {
+    'attr': { x: 0, y: 0, width: 48, height: 48 }
+  },
+  'bpmn:IntermediateThrowEvent': {
+    'attr': { x: 0, y: 0, width: 48, height: 48 }
+  },
+  'bpmn:BoundaryEvent': {
+    'attr': { x: 0, y: 0, width: 48, height: 48 }
   }
 }
 
-const hasLabelElements = ['bpmn:StartEvent', 'bpmn:ServiceTask', 'bpmn:UserTask', 'bpmn:EndEvent']
+const hasLabelElements = [
+  'bpmn:StartEvent',
+  'bpmn:ServiceTask',
+  'bpmn:UserTask',
+  'bpmn:EndEvent',
+  'bpmn:IntermediateCatchEvent',
+  'bpmn:IntermediateThrowEvent',
+  'bpmn:BoundaryEvent'
+]
 
 export { customElements, customConfig, hasLabelElements }

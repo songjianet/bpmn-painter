@@ -22,6 +22,14 @@ export const getControl = (action) => {
 }
 
 /**
+ * 获取所有元素
+ * @author songjianet
+ * */
+export const getControls = () => {
+  return controls
+}
+
+/**
  * 循环创建出一系列的元素
  * @param {Object} fn 处理的函数
  */

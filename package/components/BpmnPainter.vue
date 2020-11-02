@@ -16,7 +16,7 @@
         @isShowScaleView="isShowScaleView">
     </b-p-m-n-header>
     <div class="content">
-      <b-p-m-n-left-panel :data="data"></b-p-m-n-left-panel>
+      <b-p-m-n-left-panel :data="data" @currentShape="currentShape"></b-p-m-n-left-panel>
       <div class="canvas" ref="canvas"></div>
       <b-p-m-n-right-panel v-if="modeler" :element="element"></b-p-m-n-right-panel>
     </div>
@@ -27,7 +27,7 @@
 import BPMNHeader from './layouts/Header'
 import BPMNRightPanel from './layouts/RightPanel'
 import BPMNLeftPanel from './layouts/LeftPanel'
-import { setControls, getControl } from '../lib/BPMNData'
+import { setControls, getControl, getControls } from '../lib/BPMNData'
 import defaultXML from '../lib/defaultXML'
 import CustomModeler from '../lib/customModeler'
 import { downloadFile } from '../../utils/download'
@@ -48,11 +48,13 @@ export default {
       modeler: null,
       xml: '',
       zoom: 1, // 缩放比例
-      element: '' // render上点击节点后的dom
+      element: '', // render上点击节点后的dom
+      shapeGroup: []
     }
   },
   async mounted() {
     await setControls(this.data)
+    this.shapeGroup = getControls()[0].shapeGroup
     await disableRightClick()
     await this.initModeler()
     await this.initMinimap()
@@ -140,12 +142,12 @@ export default {
 
               if (controlProps) {
                 control.innerHTML =
-                    `
+                  `
                     <img style="width: 30px;height: 30px;" src="${controlProps['image']}">
                     <div style='font-size: 14px;font-weight:500;margin-left:15px;'>${controlProps['title']}</div>
                   `
               }
-
+              controlStyle.display = this.shapeGroup !== controlProps.shapeGroup ? 'none' : 'flex'
               for (let cnKey in controlStyle) {
                 control.style[cnKey] = controlStyle[cnKey]
               }
@@ -199,6 +201,8 @@ export default {
           xml: drawToXML(xml),
           params: JSON.parse(window.sessionStorage.getItem('params'))
         })
+
+        console.log(xml)
 
         return drawToXML(xml)
       } catch (err) {
@@ -352,6 +356,15 @@ export default {
     setZoom(val) {
       this.zoom = val / 100
       this.modeler.get('canvas').zoom(this.zoom)
+    },
+
+    /**
+     * 点击左侧shape的分类按钮
+     * @author songjianet
+     * */
+    currentShape(shapeGroup) {
+      this.shapeGroup = shapeGroup
+      this.setPalette()
     }
   },
   components: {
