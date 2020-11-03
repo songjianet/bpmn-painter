@@ -1,7 +1,7 @@
 <template>
   <div class="left-panel-container">
-    <div v-for="(item, index) in data" :key="index" @click="currentShape(item)">
-      <el-tooltip class="item" effect="dark" :content="item.shapeGroup" placement="right">
+    <div v-for="(item, index) in shapeGroup" :key="index" @click="currentShape(item)">
+      <el-tooltip class="item" effect="dark" :content="item" placement="right">
         <i class="el-icon-chat-line-square"></i>
       </el-tooltip>
     </div>
@@ -17,9 +17,17 @@ export default {
       default: () => []
     }
   },
+  data() {
+    return {
+      shapeGroup: []
+    }
+  },
+  mounted() {
+    this.shapeGroup = Array.from(new Set(this.data.map(item => item.shapeGroup)))
+  },
   methods: {
-    currentShape(item) {
-      this.$emit('currentShape', item.shapeGroup)
+    currentShape(shapeGroup) {
+      this.$emit('currentShape', shapeGroup)
     }
   }
 }
