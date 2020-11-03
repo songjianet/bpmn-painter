@@ -94,14 +94,24 @@ export default {
      * 装载并设置左侧工具栏面板
      * @author songjianet
      * */
-    setPalette() {
+    setPalette(val = false) {
       try {
         const canvas = this.$refs.canvas
         const djsPalette = canvas.children[0].children[1].children[5] // djsPalette是canvas节点下的一个类名
 
+        if (val) {
+          djsPalette.children[0].children[0].innerText = this.shapeGroup
+        } else {
+          djsPalette.innerHTML =
+              `
+              <div class="palette-container" style="width: 100%;">
+                <div class="title" style="height: 40px;line-height: 40px;padding: 0 10px;border-bottom: 3px solid rgb(31, 41, 46);font-size: 12px;font-weight: 600;color: rgb(31, 41, 46);display: flex;justify-content: center;">${this.shapeGroup}</div>
+              </div>
+            ` + djsPalette.innerHTML
+        }
+
         const djsPaletteStyle = {
           width: '250px',
-          padding: '8px 10px',
           background: 'white',
           left: 0,
           top: 0,
@@ -115,9 +125,7 @@ export default {
           djsPalette.style[key] = djsPaletteStyle[key]
         }
 
-        // djsPaletteEntriesGroups是djsPalette类所在节点的子节点djsPaletteEntries下的所有节点
-        const djsPaletteEntriesGroups = djsPalette.children[0].children
-        // djsPaletteEntriesGroups[0].style['display'] = 'none'
+        const djsPaletteEntriesGroups = djsPalette.children[1].children
 
         for (let key in djsPaletteEntriesGroups) {
           const node = djsPaletteEntriesGroups[key]
@@ -130,7 +138,8 @@ export default {
               justifyContent: 'flex-start',
               alignItems: 'center',
               width: '100%',
-              cursor: 'pointer'
+              cursor: 'pointer',
+              padding: '4px 10px'
             }
 
             if (
@@ -147,7 +156,9 @@ export default {
                     <div style='font-size: 14px;font-weight:500;margin-left:15px;'>${controlProps['title']}</div>
                   `
               }
+
               controlStyle.display = this.shapeGroup !== controlProps.shapeGroup ? 'none' : 'flex'
+
               for (let cnKey in controlStyle) {
                 control.style[cnKey] = controlStyle[cnKey]
               }
@@ -364,7 +375,7 @@ export default {
      * */
     currentShape(shapeGroup) {
       this.shapeGroup = shapeGroup
-      this.setPalette()
+      this.setPalette(true)
     }
   },
   components: {
@@ -396,6 +407,14 @@ export default {
     height: 100vh;
     padding-top: 50px;
     background-image: url("../assets/images/grid.png");
+  }
+}
+
+.palette-container {
+
+
+  .title {
+
   }
 }
 </style>

@@ -19,16 +19,16 @@ export default {
 .right-panel-default-container {
   width: 100%;
 
-.title {
-  height: 40px;
-  line-height: 37px;
-  padding: 0 10px;
-  border-bottom: 3px solid rgb(31, 41, 46);
-  font-size: 12px;
-  font-weight: 600;
-  color: rgb(31, 41, 46);
-  display: flex;
-  justify-content: center;
-}
+  .title {
+    height: 40px;
+    line-height: 40px;
+    padding: 0 10px;
+    border-bottom: 3px solid rgb(31, 41, 46);
+    font-size: 12px;
+    font-weight: 600;
+    color: rgb(31, 41, 46);
+    display: flex;
+    justify-content: center;
+  }
 }
 </style>

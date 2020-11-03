@@ -32,7 +32,7 @@ name: 'ClickTheGreetingLink',
 
   .title {
     height: 40px;
-    line-height: 37px;
+    line-height: 40px;
     padding: 0 10px;
     border-bottom: 3px solid rgb(31, 41, 46);
     font-size: 12px;
