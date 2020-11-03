@@ -1,7 +1,7 @@
 {
   "name": "bpmn-painter",
   "description": "使用vue2.x和element实现bpmn流程设计器",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "author": "songjianet <1778651752@qq.com>",
   "license": "MIT",
   "main": "dist/bpmn-painter.umd.min.js",

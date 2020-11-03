@@ -363,7 +363,6 @@ export default {
      * @author songjianet
      * */
     currentShape(shapeGroup) {
-      console.log(shapeGroup)
       this.shapeGroup = shapeGroup
       this.setPalette()
     }
