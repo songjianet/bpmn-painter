@@ -78,12 +78,12 @@ export default {
      * 装载canvas
      * @author songjianet
      * */
-    async initDraw(xml) {
+    async initDraw(xml, status = false) {
       xml = xml.replace(/<!\[CDATA\[(.+)]]>/g, '&lt;![CDATA[$1]]&gt;')
 
       try {
         await this.modeler.importXML(xml)
-        await this.setPalette()
+        await this.setPalette(status)
         await this.initEvent()
       } catch (err) {
         console.error('装载canvas出错：', err.message, err.warnings)
@@ -105,7 +105,9 @@ export default {
           djsPalette.innerHTML =
               `
               <div class="palette-container" style="width: 100%;">
-                <div class="title" style="height: 40px;line-height: 40px;padding: 0 10px;border-bottom: 3px solid rgb(31, 41, 46);font-size: 12px;font-weight: 600;color: rgb(31, 41, 46);display: flex;justify-content: center;">${this.shapeGroup}</div>
+                <div class="title" style="height: 40px;line-height: 40px;padding: 0 10px;border-bottom: 3px solid rgb(31, 41, 46);font-size: 12px;font-weight: 600;color: rgb(31, 41, 46);display: flex;justify-content: center;">
+                  <span>${this.shapeGroup}</span>
+                </div>
               </div>
             ` + djsPalette.innerHTML
         }
@@ -297,7 +299,7 @@ export default {
      * @author songjianet
      * */
     revert() {
-      this.initDraw(defaultXML())
+      this.initDraw(defaultXML(), true)
     },
 
     /**
@@ -407,14 +409,6 @@ export default {
     height: 100vh;
     padding-top: 50px;
     background-image: url("../assets/images/grid.png");
-  }
-}
-
-.palette-container {
-
-
-  .title {
-
   }
 }
 </style>

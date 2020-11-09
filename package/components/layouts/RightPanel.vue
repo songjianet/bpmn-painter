@@ -6,11 +6,6 @@
 
 <script>
 import { horizontalLineToUpperCase } from '../../../utils/horizontalLineToUpperCase'
-import AutomaticallyReplyToSubscriberMessages from '../actions/AutomaticallyReplyToSubscriberMessages'
-import ClickTheGreetingLink from '../actions/ClickTheGreetingLink'
-import ClickToSendTemplateMessage from '../actions/ClickToSendTemplateMessage'
-import EndProcess from '../actions/EndProcess'
-import WechatSubscriptionOfficialAccounts from '../actions/WechatSubscriptionOfficialAccounts'
 import Default from '../actions/Default'
 
 export default {
@@ -30,11 +25,6 @@ export default {
     }
   },
   components: {
-    AutomaticallyReplyToSubscriberMessages,
-    ClickTheGreetingLink,
-    ClickToSendTemplateMessage,
-    EndProcess,
-    WechatSubscriptionOfficialAccounts,
     Default
   }
 }

@@ -1,8 +1,8 @@
 <template>
   <div class="left-panel-container">
-    <div v-for="(item, index) in shapeGroup" :key="index" @click="currentShape(item)">
-      <el-tooltip class="item" effect="dark" :content="item" placement="right">
-        <i class="el-icon-chat-line-square"></i>
+    <div v-for="(item, index) in shapeGroup" :key="index" @click="currentShape(item.name)">
+      <el-tooltip class="item" effect="dark" :content="item.name" placement="right">
+        <img class="shape-group-image" :src="item.image" alt="">
       </el-tooltip>
     </div>
   </div>
@@ -23,7 +23,29 @@ export default {
     }
   },
   mounted() {
-    this.shapeGroup = Array.from(new Set(this.data.map(item => item.shapeGroup)))
+    this.shapeGroup = Array.from(new Set(this.data.map(item => item.shapeGroup))).map(item => {
+      if (item === '触点类型') {
+        return { name: item, image: 'https://zdgg-scrm.oss-cn-shanghai.aliyuncs.com/bpmn/chudianleixing/chudianleixing.png' }
+      } else if (item === '沟通渠道') {
+        return { name: item, image: 'https://zdgg-scrm.oss-cn-shanghai.aliyuncs.com/bpmn/goutongqudao/goutongqudao.png' }
+      } else if (item === '激励方式') {
+        return { name: item, image: 'https://zdgg-scrm.oss-cn-shanghai.aliyuncs.com/bpmn/jilifangshi/jilifangshi.png' }
+      } else if (item === '事件集合') {
+        return { name: item, image: 'https://zdgg-scrm.oss-cn-shanghai.aliyuncs.com/bpmn/shijianjihe/shijianjihe.png' }
+      } else if (item === '数字平台') {
+        return { name: item, image: 'https://zdgg-scrm.oss-cn-shanghai.aliyuncs.com/bpmn/shuzipingtai/shuzipingtai.png' }
+      } else if (item === '人群选择') {
+        return { name: item, image: 'https://zdgg-scrm.oss-cn-shanghai.aliyuncs.com/bpmn/renqunxuanze/renqunxuanze.png' }
+      } else if (item === '规则中心') {
+        return { name: item, image: 'https://zdgg-scrm.oss-cn-shanghai.aliyuncs.com/bpmn/guizezhongxin/guizezhongxin.png' }
+      } else if (item === '活动团队') {
+        return { name: item, image: 'https://zdgg-scrm.oss-cn-shanghai.aliyuncs.com/bpmn/huodongtuandui/huodongtuandui.png' }
+      } else if (item === '流程控制') {
+        return { name: item, image: 'https://zdgg-scrm.oss-cn-shanghai.aliyuncs.com/bpmn/liuchengkongzhi/liuchengkongzhi.png' }
+      } else if (item === '系统内置') {
+        return { name: item, image: 'https://zdgg-scrm.oss-cn-shanghai.aliyuncs.com/bpmn/xitongneizhi/xitongneizhi.png' }
+      }
+    })
   },
   methods: {
     currentShape(shapeGroup) {
@@ -50,14 +72,20 @@ export default {
   align-items: center;
 
   > div {
-    width: 50px;
-    height: 50px;
+    width: 20px;
+    height: 20px;
+    padding: 15px;
     text-align: center;
-    line-height: 50px;
     cursor: pointer;
+    overflow: hidden;
 
     &:hover {
       color: #005df7;
+    }
+
+    .shape-group-image {
+      width: 20px;
+      height: 20px;
     }
   }
 }
