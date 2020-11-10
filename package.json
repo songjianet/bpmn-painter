@@ -27,6 +27,7 @@
     "core-js": "^3.6.5",
     "diagram-js-minimap": "^2.0.3",
     "element-ui": "^2.13.2",
+    "lodash": "^4.17.20",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0"
   },

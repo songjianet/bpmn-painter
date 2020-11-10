@@ -25,3 +25,29 @@
     text-overflow: ellipsis;
   }
 }
+
+.right-panel-components-container ::v-deep .el-form-item__label {
+  line-height: 20px;
+  font-size: 12px;
+  margin-bottom: 5px;
+  color: #1f292e;
+}
+
+.right-panel-components-container ::v-deep .el-form-item__content {
+  line-height: 33px;
+  width: 100%;
+}
+
+.right-panel-components-container ::v-deep .el-form--inline .el-form-item {
+  margin-right: 0;
+}
+
+.right-panel-components-container ::v-deep .el-button--primary {
+  background-color: #1f292e;
+  border-color: #1f292e;
+  width: 100%;
+}
+
+.right-panel-components-container ::v-deep .el-form-item {
+  width: 100%;
+}

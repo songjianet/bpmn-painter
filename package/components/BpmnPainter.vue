@@ -34,6 +34,7 @@ import { downloadFile } from '../../utils/download'
 import { drawToXML } from '../../utils/drawToXML'
 import { disableRightClick } from '../../utils/disableRightClick'
 import minimapModule from 'diagram-js-minimap'
+import _ from 'lodash'
 
 export default {
   name: 'bpmn-painter',
@@ -55,6 +56,7 @@ export default {
   async mounted() {
     await setControls(this.data)
     this.shapeGroup = getControls()[0].shapeGroup
+    window.sessionStorage.setItem('shape', JSON.stringify([]))
     await disableRightClick()
     await this.initModeler()
     await this.initMinimap()
@@ -184,6 +186,12 @@ export default {
       })
       this.modeler.on('shape.added', e => {
         const { element } = e
+        const { action, id, title } = element
+        let shape = JSON.parse(window.sessionStorage.getItem('shape'))
+
+        shape.push({ action, id, title })
+
+        window.sessionStorage.setItem('shape', JSON.stringify(shape))
 
         this.element = element
       })
@@ -209,13 +217,33 @@ export default {
     async canvasToXML() {
       try {
         let { xml } = await this.modeler.saveXML({ format: true })
+        const params = JSON.parse(window.sessionStorage.getItem('params'))
+        const shape = JSON.parse(window.sessionStorage.getItem('shape'))
+        const shapeId = shape.map(item => item.id)
+        let paramsId = []
+        let diff = []
+        let rulesErrorShapeTitle = ''
 
-        this.$emit('save', {
-          xml: drawToXML(xml),
-          params: JSON.parse(window.sessionStorage.getItem('params'))
+        for (let i in params) {
+          paramsId.push(i)
+        }
+
+        diff = _.difference(shapeId, paramsId)
+
+        shape.forEach(item => {
+          if (diff.includes(item.id)) {
+            rulesErrorShapeTitle = item.title
+          }
         })
 
-        console.log(xml)
+        if (rulesErrorShapeTitle) {
+          this.$message.error(`请填写"${rulesErrorShapeTitle}"节点的配置属性参数！`)
+        } else {
+          this.$emit('save', {
+            xml: drawToXML(xml),
+            params
+          })
+        }
 
         return drawToXML(xml)
       } catch (err) {
