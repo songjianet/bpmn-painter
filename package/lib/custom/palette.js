@@ -1,4 +1,4 @@
-import { batchCreateCustom } from '../BPMNData'
+import { batchCreateCustom } from '../bpmn-data'
 
 /**
  * 重写bpmn.js中的PaletteProvider类

@@ -7,6 +7,11 @@
 <script>
 import { horizontalLineToUpperCase } from '../../../utils/horizontalLineToUpperCase'
 import Default from '../actions/Default'
+import OfficialAccountCode from '../actions/contacts-type/OfficialAccountCode'
+import WechatCustomerMessage from '../actions/communication-channel/WechatCustomerMessage'
+import WechatTemplateMessage from '../actions/communication-channel/WechatTemplateMessage'
+import End from '../actions/process-control/End'
+import BoundaryClock from '../actions/system-built-in/BoundaryClock'
 
 export default {
   name: 'RightPanel',
@@ -25,7 +30,12 @@ export default {
     }
   },
   components: {
-    Default
+    Default,
+    OfficialAccountCode,
+    WechatCustomerMessage,
+    WechatTemplateMessage,
+    End,
+    BoundaryClock
   }
 }
 </script>
