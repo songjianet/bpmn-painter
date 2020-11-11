@@ -232,7 +232,12 @@ export default {
 
         shape.forEach(item => {
           if (diff.includes(item.id)) {
-            rulesErrorShapeTitle = item.title
+            if (
+                (item.action !== 'create.official-account-code') &&
+                (item.action !== 'create.end')
+            ) {
+              rulesErrorShapeTitle = item.title
+            }
           }
         })
 

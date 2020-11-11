@@ -2,7 +2,7 @@
   <div class="right-panel-components-container">
     <div class="title">{{element.title}}</div>
     <div class="components-form">
-      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" inline label-width="80px" class="demo-ruleForm">
+      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" inline class="demo-ruleForm">
         <el-form-item label="消息内容" prop="content">
           <el-input type="textarea" placeholder="请填写消息内容" v-model="ruleForm.content" style="width: 100%"></el-input>
         </el-form-item>

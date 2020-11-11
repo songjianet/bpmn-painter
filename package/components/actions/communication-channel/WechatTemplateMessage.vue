@@ -2,7 +2,7 @@
   <div class="right-panel-components-container">
     <div class="title">{{element.title}}</div>
     <div class="components-form">
-      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" inline label-width="80px" class="demo-ruleForm">
+      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" inline class="demo-ruleForm">
         <el-form-item label="消息模板" prop="template">
           <el-select size="mini" v-model="ruleForm.template" placeholder="请选择消息模板" @change="change">
             <el-option v-for="(item, index) in templateOptions" :key="index" :label="item.templateName" :value="item.templateId"></el-option>

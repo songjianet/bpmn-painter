@@ -9,6 +9,7 @@
 import BpmnPainter from '../package/components/BpmnPainter'
 import '../dist/bpmn-painter.css'
 import '../package/styles/default.scss'
+import { save } from '../package/api'
 
 export default {
   data() {
@@ -445,7 +446,9 @@ export default {
   },
   methods: {
     save(data) {
-      console.log(data)
+      save(data).then(res => {
+        console.log(res)
+      })
     }
   },
   components: {
