@@ -31,6 +31,7 @@
   font-size: 12px;
   margin-bottom: 5px;
   color: #1f292e;
+  text-align: left;
 }
 
 .right-panel-components-container ::v-deep .el-form-item__content {
@@ -49,5 +50,9 @@
 }
 
 .right-panel-components-container ::v-deep .el-form-item {
+  width: 100%;
+}
+
+.right-panel-components-container ::v-deep .el-select {
   width: 100%;
 }
