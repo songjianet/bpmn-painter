@@ -1,6 +1,7 @@
 <template>
   <bpmn-painter
       :data="data"
+      request-url="http://192.168.1.107:7003"
       @save="save">
   </bpmn-painter>
 </template>

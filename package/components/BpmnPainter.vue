@@ -42,6 +42,10 @@ export default {
     data: {
       type: Array,
       default: () => []
+    },
+    requestUrl: {
+      type: String,
+      default: ''
     }
   },
   data() {
@@ -54,6 +58,7 @@ export default {
     }
   },
   async mounted() {
+    window.sessionStorage.setItem('requestUrl', this.requestUrl)
     await setControls(this.data)
     this.shapeGroup = getControls()[0].shapeGroup
     window.sessionStorage.setItem('shape', JSON.stringify([]))
