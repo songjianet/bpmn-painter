@@ -16,14 +16,14 @@ export default {
     return {
       data: [
         // 触点类型
-        {
-          action: 'create.official-account-code',
-          image: 'https://zdgg-scrm.oss-cn-shanghai.aliyuncs.com/bpmn/chudianleixing/gongzhonghao.png',
-          title: '公众号二维码',
-          type: 'bpmn:StartEvent',
-          group: 'activity',
-          shapeGroup: '触点类型'
-        },
+        // {
+        //   action: 'create.official-account-code',
+        //   image: 'https://zdgg-scrm.oss-cn-shanghai.aliyuncs.com/bpmn/chudianleixing/gongzhonghao.png',
+        //   title: '公众号二维码',
+        //   type: 'bpmn:StartEvent',
+        //   group: 'activity',
+        //   shapeGroup: '触点类型'
+        // },
         // {
         //   action: 'create.interface',
         //   image: 'https://zdgg-scrm.oss-cn-shanghai.aliyuncs.com/bpmn/chudianleixing/jiekou.png',
@@ -243,14 +243,14 @@ export default {
         //   group: 'activity',
         //   shapeGroup: '事件集合'
         // },
-        // {
-        //   action: 'create.click-event',
-        //   image: 'https://zdgg-scrm.oss-cn-shanghai.aliyuncs.com/bpmn/shijianjihe/dianji.png',
-        //   title: '点击',
-        //   type: 'bpmn:Task',
-        //   group: 'activity',
-        //   shapeGroup: '事件集合'
-        // },
+        {
+          action: 'create.click-event',
+          image: 'https://zdgg-scrm.oss-cn-shanghai.aliyuncs.com/bpmn/shijianjihe/dianji.png',
+          title: '点击',
+          type: 'bpmn:EventBasedGateway',
+          group: 'activity',
+          shapeGroup: '事件集合'
+        },
         // {
         //   action: 'create.share',
         //   image: 'https://zdgg-scrm.oss-cn-shanghai.aliyuncs.com/bpmn/shijianjihe/fenxiang.png',
@@ -384,14 +384,14 @@ export default {
         //   shapeGroup: '活动团队'
         // },
         // 流程控制
-        // {
-        //   action: 'create.begin',
-        //   image: 'https://zdgg-scrm.oss-cn-shanghai.aliyuncs.com/bpmn/liuchengkongzhi/start.png',
-        //   title: '开始',
-        //   type: 'bpmn:Task',
-        //   group: 'activity',
-        //   shapeGroup: '流程控制'
-        // },
+        {
+          action: 'create.begin',
+          image: 'https://zdgg-scrm.oss-cn-shanghai.aliyuncs.com/bpmn/liuchengkongzhi/start.png',
+          title: '开始',
+          type: 'bpmn:StartEvent',
+          group: 'activity',
+          shapeGroup: '流程控制'
+        },
         // {
         //   action: 'create.logout',
         //   image: 'https://zdgg-scrm.oss-cn-shanghai.aliyuncs.com/bpmn/liuchengkongzhi/logout.png',

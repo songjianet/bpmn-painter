@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'End',
+  name: 'ClickEvent',
   props: ['element']
 }
 </script>

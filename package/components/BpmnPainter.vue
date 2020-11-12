@@ -233,8 +233,9 @@ export default {
         shape.forEach(item => {
           if (diff.includes(item.id)) {
             if (
-                (item.action !== 'create.official-account-code') &&
-                (item.action !== 'create.end')
+                (item.action !== 'create.begin') &&
+                (item.action !== 'create.end') &&
+                (item.action !== 'create.click-event')
             ) {
               rulesErrorShapeTitle = item.title
             }

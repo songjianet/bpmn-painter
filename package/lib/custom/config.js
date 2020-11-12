@@ -5,7 +5,8 @@ const customElements = [
   'bpmn:EndEvent',
   'bpmn:IntermediateCatchEvent',
   'bpmn:IntermediateThrowEvent',
-  'bpmn:BoundaryEvent'
+  'bpmn:BoundaryEvent',
+  'bpmn:EventBasedGateway'
 ]
 
 const customConfig = {
@@ -29,6 +30,9 @@ const customConfig = {
   },
   'bpmn:BoundaryEvent': {
     'attr': { x: 0, y: 0, width: 48, height: 48 }
+  },
+  'bpmn:EventBasedGateway': {
+    'attr': { x: 0, y: 0, width: 48, height: 48 }
   }
 }
 
@@ -39,7 +43,8 @@ const hasLabelElements = [
   'bpmn:EndEvent',
   'bpmn:IntermediateCatchEvent',
   'bpmn:IntermediateThrowEvent',
-  'bpmn:BoundaryEvent'
+  'bpmn:BoundaryEvent',
+  'bpmn:EventBasedGateway'
 ]
 
 export { customElements, customConfig, hasLabelElements }

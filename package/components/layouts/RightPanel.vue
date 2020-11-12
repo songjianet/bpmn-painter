@@ -12,6 +12,7 @@ import WechatCustomerMessage from '../actions/communication-channel/WechatCustom
 import WechatTemplateMessage from '../actions/communication-channel/WechatTemplateMessage'
 import End from '../actions/process-control/End'
 import BoundaryClock from '../actions/system-built-in/BoundaryClock'
+import ClickEvent from '../actions/event-collection/ClickEvent'
 
 export default {
   name: 'RightPanel',
@@ -35,7 +36,8 @@ export default {
     WechatCustomerMessage,
     WechatTemplateMessage,
     End,
-    BoundaryClock
+    BoundaryClock,
+    ClickEvent
   }
 }
 </script>
