@@ -54,8 +54,6 @@ export default {
   },
   methods: {
     initData() {
-      console.log(111)
-
       let params = JSON.parse(window.sessionStorage.getItem('params'))
       this.ruleForm.templateProps = []
 

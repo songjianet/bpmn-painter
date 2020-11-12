@@ -7,7 +7,23 @@
 <script>
 export default {
   name: 'ClickEvent',
-  props: ['element']
+  props: ['element'],
+  mounted() {
+    this.initData()
+  },
+  methods: {
+    initData() {
+      let params = JSON.parse(window.sessionStorage.getItem('params'))
+
+      params[String(this.element.id)] = {
+        'nodeVals': {
+          'msgexpres': 'clicked'
+        }
+      }
+
+      window.sessionStorage.setItem('params', JSON.stringify(params))
+    }
+  }
 }
 </script>
 

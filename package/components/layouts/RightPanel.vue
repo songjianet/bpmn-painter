@@ -7,10 +7,10 @@
 <script>
 import { horizontalLineToUpperCase } from '../../../utils/horizontalLineToUpperCase'
 import Default from '../actions/Default'
-import OfficialAccountCode from '../actions/contacts-type/OfficialAccountCode'
 import WechatCustomerMessage from '../actions/communication-channel/WechatCustomerMessage'
 import WechatTemplateMessage from '../actions/communication-channel/WechatTemplateMessage'
 import End from '../actions/process-control/End'
+import Begin from '../actions/process-control/Begin'
 import BoundaryClock from '../actions/system-built-in/BoundaryClock'
 import ClickEvent from '../actions/event-collection/ClickEvent'
 
@@ -32,10 +32,10 @@ export default {
   },
   components: {
     Default,
-    OfficialAccountCode,
     WechatCustomerMessage,
     WechatTemplateMessage,
     End,
+    Begin,
     BoundaryClock,
     ClickEvent
   }

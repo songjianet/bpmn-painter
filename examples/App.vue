@@ -247,7 +247,7 @@ export default {
           action: 'create.click-event',
           image: 'https://zdgg-scrm.oss-cn-shanghai.aliyuncs.com/bpmn/shijianjihe/dianji.png',
           title: '点击',
-          type: 'bpmn:EventBasedGateway',
+          type: 'bpmn:IntermediateCatchEvent',
           group: 'activity',
           shapeGroup: '事件集合'
         },

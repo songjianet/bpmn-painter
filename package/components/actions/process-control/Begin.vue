@@ -12,5 +12,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "package/styles/right-panel-container";
+@import "../../../styles/right-panel-container";
 </style>
